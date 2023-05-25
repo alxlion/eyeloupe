@@ -1,0 +1,54 @@
+module Eyeloupe
+  class Configuration
+    include Singleton
+
+    attr_accessor excluded_paths: Array[String]
+    attr_accessor capture: bool
+
+    def initialize: -> void
+  end
+
+  class InRequest
+  end
+
+  class RequestMiddleware
+
+    attr_accessor processor: Processors::InRequest
+
+    def initialize: (untyped) -> void
+    def call: (Hash[String, String]) -> void
+
+    def skip_request?: (ActionDispatch::Request) -> bool
+    def enabled?: (ActionDispatch::Request) -> bool
+  end
+
+  module Processors
+    class InRequest
+      attr_accessor request: ActionDispatch::Request
+      attr_accessor env: Hash[String, String]?
+      attr_accessor status: Integer?
+      attr_accessor headers: Hash[String, String]?
+      attr_accessor response: String? | Rack::BodyProxy | ActionDispatch::Response
+      attr_accessor timings: Hash[Symbol, Float]
+      attr_accessor started_at: Time?
+      attr_accessor subs: Array[ActiveSupport::Notifications::Event]
+
+      def initialize: -> void
+      def init: (ActionDispatch::Request request, Hash[String, String]? env, Integer? status, Hash[String, String]? headers, String? response) -> void
+      def start_timer: -> void
+      def process: -> Eyeloupe::InRequest
+
+      def get_total_duration: -> Float
+      def get_response: -> String?
+      def get_controller: -> String?
+
+      def subscribe: (String event) { (ActiveSupport::Notifications::Event) -> void } -> void
+      def unsubscribe: -> void
+    end
+  end
+
+  VERSION: String
+
+  def self.configuration: -> Configuration
+  def self.configure: { (Configuration) -> void } -> void
+end

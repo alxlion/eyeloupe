@@ -1,0 +1,17 @@
+<% if verb.downcase == "post" || verb.downcase == "patch" || verb.downcase == "put" %>
+    <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-base font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+  <%= verb %>
+</span>
+<% elsif verb.downcase == "get" || verb.downcase == "options" %>
+<span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-base font-medium text-gray-600 ring-1 ring-inset ring-gray-500">
+  <%= verb %>
+</span>
+<% elsif verb.downcase == "delete" %>
+  <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-base font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+  <%= verb %>
+</span>
+<% else %>
+<span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-base font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
+  <%= verb %>
+</span>
+<% end %>

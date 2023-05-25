@@ -1,0 +1,31 @@
+one:
+  verb: POST
+  hostname: localhost
+  controller: TestController#index
+  path: /one
+  status: 200
+  duration: 20
+  ip: 127.0.0.1
+  db_duration: 1
+  view_duration: 2
+  format: application/json
+  payload:
+  headers:
+  session:
+  response:
+
+two:
+  verb: GET
+  hostname: localhost
+  controller: TestController#index
+  path: /two
+  status: 201
+  duration: 457
+  ip: 127.0.0.1
+  db_duration: 1
+  view_duration: 2
+  format: text/html
+  payload:
+  headers:
+  session:
+  response:

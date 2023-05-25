@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+}
+
+.pagination {
+    @apply relative z-0 inline-flex rounded-md shadow-sm -space-x-px;
+}
+
+.pagination .prev a {
+    @apply relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+}
+
+.pagination .next a {
+    @apply relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+}
+
+.pagination .current {
+    @apply border-red-500 text-red-500 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium;
+}
+
+.pagination a {
+    @apply bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium;
+}
+
+.pagination .disabled {
+    @apply bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium opacity-40;
+}
+
+.pagination .gap {
+    @apply relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700;
+}
+
+.pagination .active {
+    @apply z-10 bg-red-50 border-red-500 text-red-500 relative inline-flex items-center px-4 py-2 border text-sm font-medium;
+}
+
+.pagination .previous_page, .pagination .next_page {
+    @apply hidden;
+}

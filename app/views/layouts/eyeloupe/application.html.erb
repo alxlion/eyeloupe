@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eyeloupe</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= javascript_importmap_tags "eyeloupe/application" %>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <%= stylesheet_link_tag "eyeloupe", media: "all" %>
+</head>
+<body class="bg-gray-50">
+
+  <div data-controller="eyeloupe--nav">
+    <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
+    <div class="relative z-50 lg:hidden hidden" role="dialog" aria-modal="true" data-eyeloupe--nav-target="content">
+      <div class="fixed inset-0 bg-gray-900/80"></div>
+
+      <div class="fixed inset-0 flex">
+        <div class="relative mr-16 flex w-full max-w-xs flex-1">
+          <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
+            <button data-action="eyeloupe--nav#close" type="button" class="-m-2.5 p-2.5">
+              <span class="sr-only">Close sidebar</span>
+              <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+
+          <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-50 px-6 pb-2">
+            <%= link_to root_url, class:"flex h-16 shrink-0 items-center" do %>
+              <%= image_tag "eyeloupe/logo.png", class: "h-7 w-auto" %>
+              <h1 class="ml-2 text-xl font-semibold text-gray-700">Eyeloupe</h1>
+            <% end  %>
+            <nav class="flex flex-1 flex-col">
+              <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                <li>
+                  <ul role="list" class="-mx-2 space-y-1">
+                    <li>
+                      <%= link_to in_requests_path, class:"#{current_page?(in_requests_path) || current_page?(in_request_path) ? 'bg-gray-200 text-red-500' : ''} hover:bg-gray-200 text-gray-500 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-medium" do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <path d="M21 17l-18 0"></path>
+                          <path d="M6 10l-3 -3l3 -3"></path>
+                          <path d="M3 7l18 0"></path>
+                          <path d="M18 20l3 -3l-3 -3"></path>
+                        </svg>
+                        Requests
+                      <% end %>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Static sidebar for desktop -->
+    <div class="container mx-auto">
+      <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-50 px-6">
+          <%= link_to root_path, class:"flex h-16 shrink-0 items-center" do %>
+            <%= image_tag "eyeloupe/logo.png", class: "h-12 w-auto" %>
+            <h1 class="ml-2 text-2xl font-semibold text-gray-700">Eyeloupe</h1>
+          <% end  %>
+          <nav class="flex flex-1 flex-col">
+            <ul role="list" class="flex flex-1 flex-col gap-y-7">
+              <li>
+                <ul role="list" class="-mx-2 space-y-1">
+                  <li>
+                    <%= link_to in_requests_path, class:"#{current_page?(in_requests_path) || current_page?(in_request_path) ? 'bg-gray-200 text-red-500' : ''} hover:bg-gray-200 text-gray-500 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-medium" do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M21 17l-18 0"></path>
+                        <path d="M6 10l-3 -3l3 -3"></path>
+                        <path d="M3 7l18 0"></path>
+                        <path d="M18 20l3 -3l-3 -3"></path>
+                      </svg>
+                      Requests
+                    <% end %>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+      <button data-action="eyeloupe--nav#open" type="button" class="-m-2.5 p-2.5 text-red-500 lg:hidden">
+        <span class="sr-only">Open sidebar</span>
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+      <%= link_to root_url, class: "flex gap-x-1" do %>
+        <%= image_tag "eyeloupe/logo.png", class: "h-7 w-auto" %>
+        <h1 class="ml-2 text-xl font-semibold text-gray-700">Eyeloupe</h1>
+      <% end  %>
+    </div>
+
+    <main class="py-10 lg:pl-72 container mx-auto" data-controller="eyeloupe--refresh">
+
+      <div class="w-full py-4 flex justify-end items-end px-4 sm:px-0 gap-x-2">
+        <% if Eyeloupe.configuration.capture %>
+          <%= link_to configs_path(value: "#{!@eyeloupe_capture}"), title: "Pause data collection", data: { "turbo_method": "put" }, class: "#{@eyeloupe_capture ? "text-gray-500 hover:bg-gray-300 bg-gray-200" : "bg-red-500 text-white hover:bg-red-600"} rounded-md p-1 transition duration-500 inline-block" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
+              <path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
+            </svg>
+          <% end %>
+        <% else %>
+          <button onclick="alert('Please enable capture in Eyeloupe config')" class="bg-red-500 text-white hover:bg-red-600 rounded-md p-1 transition duration-500 inline-block">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
+              <path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
+            </svg>
+          </button>
+        <% end  %>
+        <button title="Auto refresh data" data-action="eyeloupe--refresh#toggle" data-eyeloupe--refresh-target="btn" class="rounded-md text-gray-500 hover:bg-gray-300 bg-gray-200 p-1 transition duration-500 inline-block">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+            <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+          </svg>
+        </button>
+        <%= link_to data_path, title: "Delete all Eyeloupe data", data: { "turbo_method": "delete", "turbo_confirm": "Are you sure to delete all Eyeloupe data?" }, class: "rounded-md text-gray-500 hover:bg-gray-300 bg-gray-200 p-1 transition duration-500 inline-block" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4 7l16 0"></path>
+            <path d="M10 11l0 6"></path>
+            <path d="M14 11l0 6"></path>
+            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+          </svg>
+        <% end %>
+      </div>
+
+      <div class="px-4 sm:px-6 lg:px-8 bg-white rounded-md shadow-md py-5">
+        <%= yield %>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>
