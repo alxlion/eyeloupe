@@ -5,6 +5,7 @@ require 'eyeloupe/request_middleware'
 require 'eyeloupe/configuration'
 require 'eyeloupe/http'
 require 'eyeloupe/processors/in_request'
+require 'eyeloupe/processors/out_request'
 
 module Eyeloupe
 

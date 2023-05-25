@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_18_175305) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_125352) do
   create_table "eyeloupe_in_requests", force: :cascade do |t|
     t.string "verb"
     t.string "hostname"
@@ -25,6 +25,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_175305) do
     t.text "payload"
     t.text "headers"
     t.text "session"
+    t.text "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "eyeloupe_out_requests", force: :cascade do |t|
+    t.string "verb"
+    t.string "hostname"
+    t.string "uri"
+    t.string "format"
+    t.integer "status"
+    t.integer "duration"
+    t.text "payload"
+    t.text "req_headers"
+    t.text "res_headers"
     t.text "response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
