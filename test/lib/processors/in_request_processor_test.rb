@@ -15,7 +15,7 @@ class InRequestProcessorTest < ActiveSupport::TestCase
     @request = ActionDispatch::Request.new(@env)
   end
 
-  test "should initialize" do
+  test "should initialize in request processor" do
     assert_not_nil @processor
   end
 

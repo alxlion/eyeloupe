@@ -6,6 +6,7 @@ module Eyeloupe
     before_action :set_config, only: [:update]
 
     def update
+      Eyeloupe.configuration.capture = @value == "true"
       cookies[:eyeloupe_capture] = @value
       redirect_to root_path, status: 303
     end

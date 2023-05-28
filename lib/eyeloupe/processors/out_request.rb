@@ -33,8 +33,8 @@ module Eyeloupe
           format: @response.content_type,
           duration: (Time.now - @started_at) * 1000,
           payload: @request.body,
-          req_headers: (get_req_headers || {}).to_json,
-          res_headers: (@response.header || {}).to_json,
+          req_headers: (get_headers(@request) || {}).to_json,
+          res_headers: (get_headers(@response) || {}).to_json,
           response: @response.body,
           )
         response
@@ -42,14 +42,13 @@ module Eyeloupe
 
       protected
 
-      def get_req_headers
+      def get_headers(el)
         headers = {}
-        @request.each_header do |key, value|
+        el.each_header do |key, value|
           headers[key] = value
         end
         headers
       end
-
 
     end
   end

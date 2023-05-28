@@ -57,6 +57,8 @@ module Eyeloupe
       def initialize: -> void
       def init: (Net::HttpRequest request, String body) -> void
       def process: (Net::HttpResponse response) -> Net::HttpResponse
+
+      def get_headers: (Net::HttpRequest | Net::HttpResponse el) -> Hash[String, String]
     end
   end
 

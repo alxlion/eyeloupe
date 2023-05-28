@@ -53,15 +53,15 @@
         </dd>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-base font-medium leading-6 text-gray-900">Response</dt>
-        <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0 rounded-md bg-black text-white overflow-x-auto">
-          <pre class="p-2"><%= @request.format == "application/json" ? JSON.pretty_generate(JSON.parse(@request.response || "{}")) : @request.response %></pre>
-        </dd>
-      </div>
-      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-base font-medium leading-6 text-gray-900">Response headers</dt>
         <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0  rounded-md bg-black text-white overflow-x-auto">
           <pre class="p-2"><%= JSON.pretty_generate(JSON.parse(@request.res_headers || "{}")) %></pre>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Response</dt>
+        <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0 rounded-md bg-black text-white overflow-x-auto">
+          <pre class="p-2"><%= @request.format == "application/json" ? JSON.pretty_generate(JSON.parse(@request.response || "{}")) : @request.response %></pre>
         </dd>
       </div>
     </dl>

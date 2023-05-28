@@ -7,6 +7,8 @@ module Eyeloupe
     # GET /out_requests
     def index
       @pagy, @requests = pagy(OutRequest.all.order(created_at: :desc), items: 50)
+
+      render partial: 'frame' if params[:frame].present?
     end
 
     # GET /out_requests/1

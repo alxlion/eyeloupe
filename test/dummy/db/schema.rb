@@ -33,7 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_125352) do
   create_table "eyeloupe_out_requests", force: :cascade do |t|
     t.string "verb"
     t.string "hostname"
-    t.string "uri"
+    t.string "path"
     t.string "format"
     t.integer "status"
     t.integer "duration"

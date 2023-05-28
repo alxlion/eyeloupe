@@ -6,6 +6,6 @@
     </div>
   </div>
   <div class="mt-8 flow-root">
-
+    <%= turbo_frame_tag "frame", src: out_requests_path(frame: true), data: {"eyeloupe--refresh-target": "frame"} do %><% end %>
   </div>
 </div>

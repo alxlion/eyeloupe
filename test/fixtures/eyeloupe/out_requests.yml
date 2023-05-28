@@ -1,9 +1,7 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
   verb: GET
   hostname: hostname
-  uri: http://example.com/uri
+  path: /uri
   status: 200
   format: application/json
   duration: 2
@@ -15,7 +13,7 @@ one:
 two:
   verb: POST
   hostname: hostname2
-  uri: http://example.com/uri2
+  path: /uri2
   status: 202
   format: application/json
   duration: 1
