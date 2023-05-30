@@ -47,18 +47,18 @@ module Eyeloupe
     end
 
     class OutRequest
-      attr_accessor request: Net::HttpRequest
+      attr_accessor request: Net::HTTPRequest
       attr_accessor body: String
       attr_accessor req_headers: Hash[String, String]
       attr_accessor res_headers: Hash[String, String]
-      attr_accessor response: Net::HttpResponse
+      attr_accessor response: Net::HTTPResponse
       attr_accessor started_at: Time?
 
       def initialize: -> void
-      def init: (Net::HttpRequest request, String body) -> void
-      def process: (Net::HttpResponse response) -> Net::HttpResponse
+      def init: (Net::HTTPRequest request, String body) -> void
+      def process: (Net::HTTPResponse response) -> Net::HTTPResponse
 
-      def get_headers: (Net::HttpRequest | Net::HttpResponse el) -> Hash[String, String]
+      def get_headers: (Net::HTTPRequest | Net::HTTPResponse el) -> Hash[String, String]
     end
   end
 
