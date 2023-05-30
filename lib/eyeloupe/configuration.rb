@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'singleton'
+
 module Eyeloupe
   class Configuration
     include Singleton

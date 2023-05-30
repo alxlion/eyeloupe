@@ -1,0 +1,69 @@
+<div>
+  <div class="px-4 sm:px-0">
+    <h3 class="text-xl font-semibold leading-7 text-gray-900">HTTP Client Request Details</h3>
+  </div>
+  <div class="mt-6 border-t border-gray-100">
+    <dl class="divide-y divide-gray-100">
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Time</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= @request.created_at.to_formatted_s(:long) %> (<%= distance_of_time_in_words(@request.created_at, DateTime.now) %>)
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Hostname</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @request.hostname %></dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Method</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= render "eyeloupe/shared/verb", verb: @request.verb %>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Path</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @request.path %></dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Status</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= render "eyeloupe/shared/status_code", code: @request.status %>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Duration</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= @request.duration %> ms
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Payload</dt>
+        <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0 rounded-md bg-black text-white overflow-x-auto">
+          <% if @request.payload.present? %>
+            <pre class="p-2"><%= @request.payload %></pre>
+          <% else %>
+            <p class="text-gray-400 p-2">No payload</p>
+          <% end %>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Request headers</dt>
+        <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0  rounded-md bg-black text-white overflow-x-auto">
+          <pre class="p-2"><%= JSON.pretty_generate(JSON.parse(@request.req_headers || "{}")) %></pre>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Response headers</dt>
+        <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0  rounded-md bg-black text-white overflow-x-auto">
+          <pre class="p-2"><%= JSON.pretty_generate(JSON.parse(@request.res_headers || "{}")) %></pre>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Response</dt>
+        <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0 rounded-md bg-black text-white overflow-x-auto">
+          <pre class="p-2"><%= @request.format == "application/json" ? JSON.pretty_generate(JSON.parse(@request.response || "{}")) : @request.response %></pre>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>

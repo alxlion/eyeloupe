@@ -24,8 +24,7 @@ module Eyeloupe
           response = e.message
           raise
         ensure
-          @processor.init(request, env, status, headers, response)
-          @processor.process
+          @processor.init(request, env, status, headers, response).process
         end
       else
         @app.call(env)
@@ -33,7 +32,7 @@ module Eyeloupe
 
     end
 
-    private
+    protected
 
     # Check if capture is enabled, if so we are looking to the capture cookie, if no cookie present capture is enabled by default
     def enabled?(request)

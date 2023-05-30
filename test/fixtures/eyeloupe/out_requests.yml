@@ -1,0 +1,23 @@
+one:
+  verb: GET
+  hostname: hostname
+  path: /uri
+  status: 200
+  format: application/json
+  duration: 2
+  payload:
+  req_headers:
+  res_headers:
+  response:
+
+two:
+  verb: POST
+  hostname: hostname2
+  path: /uri2
+  status: 202
+  format: application/json
+  duration: 1
+  payload:
+  req_headers:
+  res_headers:
+  response:

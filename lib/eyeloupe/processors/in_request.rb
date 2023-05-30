@@ -28,6 +28,8 @@ module Eyeloupe
         @status = status
         @headers = headers
         @response = response
+
+        self
       end
 
       def start_timer
