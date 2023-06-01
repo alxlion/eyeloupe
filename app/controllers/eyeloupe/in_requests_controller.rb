@@ -2,11 +2,12 @@
 
 module Eyeloupe
   class InRequestsController < ApplicationController
+    include Searchable
 
     before_action :set_in_request, only: [:show]
 
     def index
-      @pagy, @requests = pagy(InRequest.all.order(created_at: :desc), items: 50)
+      @pagy, @requests = pagy(@query, items: 50)
 
       render partial: 'frame' if params[:frame].present?
     end

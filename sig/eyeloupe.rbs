@@ -11,6 +11,10 @@ module Eyeloupe
   class InRequest
   end
 
+  module Searchable
+    def set_query: -> void
+  end
+
   class RequestMiddleware
 
     attr_accessor processor: Processors::InRequest

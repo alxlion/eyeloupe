@@ -2,11 +2,13 @@
 
 module Eyeloupe
   class OutRequestsController < ApplicationController
+    include Searchable
+
     before_action :set_out_request, only: %i[ show ]
 
     # GET /out_requests
     def index
-      @pagy, @requests = pagy(OutRequest.all.order(created_at: :desc), items: 50)
+      @pagy, @requests = pagy(@query, items: 50)
 
       render partial: 'frame' if params[:frame].present?
     end

@@ -1,11 +1,18 @@
-<div>
+<div data-controller="eyeloupe--search">
   <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
       <h1 class="text-xl font-semibold leading-6 text-gray-900">HTTP Client</h1>
       <p class="mt-2 text-sm text-gray-700">All outbound HTTP requests made by your application</p>
     </div>
+    <div>
+      <form method="get" data-action="eyeloupe--search#submit">
+        <input type="hidden" name="frame" value="frame" />
+        <label for="q" class="sr-only">Search</label>
+        <input type="text" id="q" name="q" value="<%= params[:q] %>" placeholder="Search for path" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm" />
+      </form>
+    </div>
   </div>
   <div class="mt-8 flow-root">
-    <%= turbo_frame_tag "frame", src: out_requests_path(frame: true), data: {"eyeloupe--refresh-target": "frame"} do %><% end %>
+    <%= turbo_frame_tag "frame", src: out_requests_path(frame: true), data: {"eyeloupe--refresh-target": "frame", "eyeloupe--search-target": "frame"} do %><% end %>
   </div>
 </div>
