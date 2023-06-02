@@ -4,7 +4,7 @@ module Eyeloupe
 
     def initialize(app)
       @app = app
-      @processor = Processors::InRequest.instance
+      @inrequest_processor = Processors::InRequest.instance
     end
 
     def call(env)
@@ -12,7 +12,7 @@ module Eyeloupe
       request = ActionDispatch::Request.new(env)
 
       if enabled?(request) && !skip_request?(request)
-        @processor.start_timer
+        @inrequest_processor.start_timer
 
         begin
           status, headers, response = @app.call(env)
@@ -24,7 +24,7 @@ module Eyeloupe
           response = e.message
           raise
         ensure
-          @processor.init(request, env, status, headers, response).process
+          @inrequest_processor.init(request, env, status, headers, response).process
         end
       else
         @app.call(env)

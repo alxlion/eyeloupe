@@ -76,7 +76,7 @@
     </div>
 
     <!-- Static sidebar for desktop -->
-    <div class="container mx-auto">
+    <div class="mx-auto">
       <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-50 px-6">
           <%= link_to root_path, class:"flex h-16 shrink-0 items-center" do %>
@@ -134,26 +134,16 @@
       <% end  %>
     </div>
 
-    <main class="py-10 lg:pl-72 container mx-auto" data-controller="eyeloupe--refresh">
+    <main class="py-10 lg:pl-72 px-5 mx-auto" data-controller="eyeloupe--refresh">
 
       <div class="w-full py-4 flex justify-end items-end px-4 sm:px-0 gap-x-2">
-        <% if Eyeloupe.configuration.capture %>
-          <%= link_to configs_path(value: "#{!@eyeloupe_capture}"), title: "Pause data collection", data: { "turbo_method": "put" }, class: "#{@eyeloupe_capture ? "text-gray-500 hover:bg-gray-300 bg-gray-200" : "bg-red-500 text-white hover:bg-red-600"} rounded-md p-1 transition duration-500 inline-block" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
-              <path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
-            </svg>
-          <% end %>
-        <% else %>
-          <button onclick="alert('Please enable capture in Eyeloupe config')" class="bg-red-500 text-white hover:bg-red-600 rounded-md p-1 transition duration-500 inline-block">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
-              <path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
-            </svg>
-          </button>
-        <% end  %>
+        <%= link_to configs_path(value: "#{!@eyeloupe_capture}"), title: "Pause data collection", data: { "turbo_method": "put" }, class: "#{@eyeloupe_capture ? "text-gray-500 hover:bg-gray-300 bg-gray-200" : "bg-red-500 text-white hover:bg-red-600"} rounded-md p-1 transition duration-500 inline-block hidden" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
+            <path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path>
+          </svg>
+        <% end %>
         <button title="Auto refresh data" data-action="eyeloupe--refresh#toggle" data-eyeloupe--refresh-target="btn" class="rounded-md text-gray-500 hover:bg-gray-300 bg-gray-200 p-1 transition duration-500 inline-block">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

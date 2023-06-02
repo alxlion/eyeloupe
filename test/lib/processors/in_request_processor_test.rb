@@ -4,7 +4,7 @@ require "test_helper"
 
 class InRequestProcessorTest < ActiveSupport::TestCase
   def setup
-    @processor = Eyeloupe::Processors::InRequest.instance
+    @inrequest_processor = Eyeloupe::Processors::InRequest.instance
     @env = {
       "REQUEST_METHOD" => "GET",
       "PATH_INFO" => "/",
@@ -16,74 +16,74 @@ class InRequestProcessorTest < ActiveSupport::TestCase
   end
 
   test "should initialize in request processor" do
-    assert_not_nil @processor
+    assert_not_nil @inrequest_processor
   end
 
   test "should start timer and subscribe" do
-    @processor.start_timer
-    assert_not_nil @processor.started_at
-    assert @processor.started_at.is_a?(Time)
-    assert @processor.subs.size == 1
-    assert @processor.subs[0].is_a?(ActiveSupport::Notifications::Fanout::Subscribers::Timed)
+    @inrequest_processor.start_timer
+    assert_not_nil @inrequest_processor.started_at
+    assert @inrequest_processor.started_at.is_a?(Time)
+    assert @inrequest_processor.subs.size == 1
+    assert @inrequest_processor.subs[0].is_a?(ActiveSupport::Notifications::Fanout::Subscribers::Timed)
   end
 
   test "should unsubscribe after process" do
-    @processor.start_timer
-    @processor.init(@request, @env, 200, {}, "")
-    assert_not_nil @processor.process
-    assert @processor.subs.size == 0
+    @inrequest_processor.start_timer
+    @inrequest_processor.init(@request, @env, 200, {}, "")
+    assert_not_nil @inrequest_processor.process
+    assert @inrequest_processor.subs.size == 0
   end
 
   test "should have correct total duration without timings" do
-    @processor.start_timer
-    @processor.init(@request, @env, 200, {}, "")
-    assert_not_equal 0, @processor.send(:get_total_duration)
+    @inrequest_processor.start_timer
+    @inrequest_processor.init(@request, @env, 200, {}, "")
+    assert_not_equal 0, @inrequest_processor.send(:get_total_duration)
   end
 
   test "should have correct total duration with timings" do
-    @processor.start_timer
-    @processor.init(@request, @env, 200, {}, "")
-    @processor.timings = {
+    @inrequest_processor.start_timer
+    @inrequest_processor.init(@request, @env, 200, {}, "")
+    @inrequest_processor.timings = {
       controller_time: 1,
     }
-    assert_equal 1, @processor.send(:get_total_duration)
+    assert_equal 1, @inrequest_processor.send(:get_total_duration)
   end
 
   test "should get correct response" do
-    @processor.start_timer
+    @inrequest_processor.start_timer
     @env['HTTP_ACCEPT'] = "text/html"
     @request = ActionDispatch::Request.new(@env)
 
-    @processor.init(@request, @env, 200, {}, "")
+    @inrequest_processor.init(@request, @env, 200, {}, "")
 
-    assert_equal "HTML content", @processor.send(:get_response)
+    assert_equal "HTML content", @inrequest_processor.send(:get_response)
   end
 
   test "should get correct response for body response" do
-    @processor.start_timer
+    @inrequest_processor.start_timer
     @request.format = nil
     response = ActionDispatch::Response.new(200, {}, "test")
-    @processor.init(@request, @env, 200, {}, response)
-    assert_equal "test", @processor.send(:get_response)
+    @inrequest_processor.init(@request, @env, 200, {}, response)
+    assert_equal "test", @inrequest_processor.send(:get_response)
   end
 
   test "should get correct response for non body response" do
-    @processor.start_timer
+    @inrequest_processor.start_timer
     @request.format = nil
-    @processor.init(@request, @env, 200, {}, "test2")
-    assert_equal "test2", @processor.send(:get_response)
+    @inrequest_processor.init(@request, @env, 200, {}, "test2")
+    assert_equal "test2", @inrequest_processor.send(:get_response)
   end
 
   test "should get correct controller with no controller class" do
-    @processor.start_timer
-    @processor.init(@request, @env, 200, {}, "")
-    assert_nil @processor.send(:get_controller)
+    @inrequest_processor.start_timer
+    @inrequest_processor.init(@request, @env, 200, {}, "")
+    assert_nil @inrequest_processor.send(:get_controller)
   end
 
   test "should get correct controller with controller class" do
-    @processor.start_timer
+    @inrequest_processor.start_timer
     @request.path_parameters = { controller: "eyeloupe/in_requests", action: "index" }
-    @processor.init(@request, @env, 200, {}, "")
-    assert_equal "Eyeloupe::InRequestsController#index", @processor.send(:get_controller)
+    @inrequest_processor.init(@request, @env, 200, {}, "")
+    assert_equal "Eyeloupe::InRequestsController#index", @inrequest_processor.send(:get_controller)
   end
 end

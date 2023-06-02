@@ -17,7 +17,7 @@ module Eyeloupe
 
   class RequestMiddleware
 
-    attr_accessor processor: Processors::InRequest
+    attr_accessor inrequest_processor: Processors::InRequest
 
     def initialize: (untyped) -> void
     def call: (Hash[String, String]) -> void
