@@ -21,6 +21,7 @@
   </p>
 </div>
 
+[![Eyeloupe screenshot][eyeloupe-screen]](https://github.com/alxlion/eyeloupe)
 
 Eyeloupe is the elegant Rails debug assistant. It helps you to debug your Rails application by providing a simple and elegant interface to view your incoming and outgoing requests, and a lot more.
 
@@ -80,3 +81,4 @@ Project Link: [https://github.com/alxlion/eyeloupe](https://github.com/alxlion/e
 [issues-url]: https://github.com/alxlion/eyeloupe/issues
 [license-shield]: https://img.shields.io/github/license/alxlion/eyeloupe.svg?style=for-the-badge
 [license-url]: https://github.com/alxlion/eyeloupe/blob/master/MIT-LICENSE.txt
+[product-screenshot]: /doc/img/screen.png
