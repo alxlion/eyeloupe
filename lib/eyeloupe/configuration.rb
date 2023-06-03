@@ -5,7 +5,11 @@ module Eyeloupe
   class Configuration
     include Singleton
 
-    attr_accessor :excluded_paths, :capture
+    # @return [Array<String>]
+    attr_accessor :excluded_paths
+
+    # @return [Boolean]
+    attr_accessor :capture
 
     def initialize
       @excluded_paths = %w[]

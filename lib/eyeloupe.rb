@@ -9,10 +9,12 @@ require 'eyeloupe/processors/out_request'
 
 module Eyeloupe
 
+  # @return [Eyeloupe::Configuration]
   def self.configuration
     Configuration.instance
   end
 
+  # @yieldparam [Eyeloupe::Configuration] configuration
   def self.configure
     yield(configuration)
   end

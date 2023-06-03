@@ -5,7 +5,23 @@ module Eyeloupe
     class OutRequest
       include Singleton
 
-      attr_accessor :request, :body, :req_headers, :res_headers, :response, :started_at
+      # @return [Net::HTTPRequest, nil]
+      attr_accessor :request
+
+      # @return [String]
+      attr_accessor :body
+
+      # @return [Hash]
+      attr_accessor :req_headers
+
+      # @return [Hash]
+      attr_accessor :res_headers
+
+      # @return [Net::HTTPResponse, nil]
+      attr_accessor :response
+
+      # @return [Time, nil]
+      attr_accessor :started_at
 
       def initialize
         @request = nil
@@ -16,12 +32,16 @@ module Eyeloupe
         @response = nil
       end
 
+      # @param [Net::HTTPRequest] request The request object
+      # @param [String] body The request body
       def init(request, body)
         @request = request
         @body = body
         @started_at = Time.now
       end
 
+      # @param [Net::HTTPResponse] response The response object
+      # @return [Net::HTTPResponse] The response object
       def process(response)
         @response = response
 
@@ -42,6 +62,7 @@ module Eyeloupe
 
       protected
 
+      # @param [Net::HTTPRequest, Net::HTTPResponse] el The request or response object to get headers from
       def get_headers(el)
         headers = {}
         el.each_header do |key, value|

@@ -7,7 +7,29 @@ module Eyeloupe
 
       include Singleton
 
-      attr_accessor :request, :env, :status, :headers, :response, :timings, :started_at, :subs
+      # @return [ActionDispatch::Request]
+      attr_accessor :request
+
+      # @return [Hash, nil]
+      attr_accessor :env
+
+      # @return [Integer, nil]
+      attr_accessor :status
+
+      # @return [Hash, nil]
+      attr_accessor :headers
+
+      # @return [String, nil, Rack::BodyProxy, ActionDispatch::Response]
+      attr_accessor :response
+
+      # @return [Hash]
+      attr_accessor :timings
+
+      # @return [Time, nil]
+      attr_accessor :started_at
+
+      # @return [Array]
+      attr_accessor :subs
 
       def initialize
         @env = {}
@@ -20,6 +42,12 @@ module Eyeloupe
         @subs = []
       end
 
+      # @param [ActionDispatch::Request] request The request object
+      # @param [Hash, nil] env Rack environment
+      # @param [Integer, nil] status HTTP status code
+      # @param [Hash, nil] headers HTTP headers
+      # @param [String, nil] response HTTP response
+      # @return [Eyeloupe::Processors::InRequest]
       def init(request, env, status, headers, response)
         unsubscribe
 
@@ -42,6 +70,7 @@ module Eyeloupe
         end
       end
 
+      # @return [Eyeloupe::InRequest]
       def process
         Eyeloupe::InRequest.create(
           verb: @request.request_method,
@@ -63,6 +92,7 @@ module Eyeloupe
 
       protected
 
+      # @return [Float]
       def get_total_duration
         if @timings[:controller_time].present?
           @timings[:controller_time].round
@@ -73,6 +103,7 @@ module Eyeloupe
         end
       end
 
+      # @return [String, nil]
       def get_response
         if @request.format.to_s =~ /html/
           "HTML content"
@@ -85,6 +116,7 @@ module Eyeloupe
         end
       end
 
+      # @return [String, nil]
       def get_controller
         if @request.controller_class.to_s =~ /PASS_NOT_FOUND/
           nil
@@ -95,6 +127,9 @@ module Eyeloupe
 
       private
 
+      # @param [String] event The event to subscribe to
+      # @param [Proc] block The block to execute when the event is triggered
+      # @yield [ActiveSupport::Notifications::Event] The event object
       def subscribe(event, &block)
         @subs << ActiveSupport::Notifications.subscribe(event) do |*args|
           block.call(ActiveSupport::Notifications::Event.new(*args))

@@ -2,11 +2,15 @@ module Eyeloupe
 
   class RequestMiddleware
 
+    # @return [Eyeloupe::Processors::InRequest]
+    attr_accessor :inrequest_processor
+
     def initialize(app)
       @app = app
       @inrequest_processor = Processors::InRequest.instance
     end
 
+    # @param [Hash] env Rack environment
     def call(env)
 
       request = ActionDispatch::Request.new(env)
@@ -35,6 +39,9 @@ module Eyeloupe
     protected
 
     # Check if capture is enabled, if so we are looking to the capture cookie, if no cookie present capture is enabled by default
+    #
+    # @param [ActionDispatch::Request] request
+    # @return [Boolean]
     def enabled?(request)
       if Eyeloupe.configuration.capture
         if request.cookies['eyeloupe_capture'].present?
@@ -47,6 +54,10 @@ module Eyeloupe
       end
     end
 
+    # Check if the request path is in the excluded paths
+    #
+    # @param [ActionDispatch::Request] request
+    # @return [Boolean]
     def skip_request?(request)
       excluded_paths = %w[mini-profiler eyeloupe active_storage] + Eyeloupe.configuration.excluded_paths
 
