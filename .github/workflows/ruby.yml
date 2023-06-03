@@ -20,6 +20,9 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: [ '2.7', '3.0' ]
     services:
       postgres:
         image: postgres:12.7
@@ -36,6 +39,7 @@ jobs:
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
         with:
+          ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
 
       - name: Setup test database
