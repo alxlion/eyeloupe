@@ -29,11 +29,16 @@ export default class extends Controller {
 
     _setActiveClass() {
         if (this.enabled) {
-            this.btnTarget.classList.add("bg-red-500", "text-white", "hover:bg-red-600")
-            this.btnTarget.classList.remove("bg-gray-200", "text-gray-500", "hover:bg-gray-300")
+            this.btnTargets.forEach((btn) => {
+                btn.classList.add("bg-red-500", "text-white", "hover:bg-red-600")
+                btn.classList.remove("bg-gray-200", "text-gray-500", "hover:bg-gray-300")
+            })
+
         } else {
-            this.btnTarget.classList.remove("bg-red-500", "text-white", "hover:bg-red-600")
-            this.btnTarget.classList.add("bg-gray-200", "text-gray-500", "hover:bg-gray-300")
+            this.btnTargets.forEach((btn) => {
+                btn.classList.remove("bg-red-500", "text-white", "hover:bg-red-600")
+                btn.classList.add("bg-gray-200", "text-gray-500", "hover:bg-gray-300")
+            })
         }
     }
 
