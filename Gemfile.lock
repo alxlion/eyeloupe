@@ -2,11 +2,10 @@ PATH
   remote: .
   specs:
     eyeloupe (0.1.0)
-      importmap-rails
-      pagy
-      rails (>= 7)
-      sprockets-rails
-      tailwindcss-rails
+      importmap-rails (>= 1.1)
+      pagy (>= 6.0)
+      rails (>= 7.0)
+      sprockets-rails (>= 3.4)
 
 GEM
   remote: https://rubygems.org/
@@ -109,7 +108,7 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
-    nio4r (2.5.8)
+    nio4r (2.5.9)
     nokogiri (1.14.2-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.14.2-x86_64-linux)
@@ -181,6 +180,7 @@ DEPENDENCIES
   pagy
   sprockets-rails
   sqlite3
+  tailwindcss-rails (~> 2.0)
   turbo-rails
 
 BUNDLED WITH
