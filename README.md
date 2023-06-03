@@ -25,9 +25,6 @@
 
 Eyeloupe is the elegant Rails debug assistant. It helps you to debug your Rails application by providing a simple and elegant interface to view your incoming and outgoing requests, and a lot more.
 
-## Usage
-How to use my plugin.
-
 ## Installation
 Add this line to your application's Gemfile:
 
@@ -40,10 +37,59 @@ And then execute:
 $ bundle
 ```
 
-Or install it yourself as:
+Install Eyeloupe migrations into your project:
 ```bash
-$ gem install eyeloupe
+$ rails eyeloupe:install:migrations
 ```
+
+And run the migrations:
+```bash
+$ rails db:migrate
+```
+
+## Configuration
+
+This is an example of the configuration you can add to your `initializers/eyeloupe.rb` file:
+
+```ruby
+Eyeloupe.configure do |config|
+  config.excluded_paths = %w[assets favicon.ico dance.riv service-worker.js manifest.json]
+  config.capture = true
+end
+```
+
+- `excluded_paths` is an array of paths you want to exclude from Eyeloupe capture. Eyeloupe adds these excluded paths to the default ones: ` %w[mini-profiler eyeloupe active_storage]`
+- `capture` is a boolean to enable/disable Eyeloupe capture. By default, it's set to `true`.
+
+## Usage
+
+Eyeloupe is exclusively developed for Rails framework.
+
+You can use it in your development environment to debug your application but it's not recommended to use it in production.
+
+### Auto-refresh
+
+By activating auto-fresh, every _3 seconds_ the page will be refreshed to show you the latest data.
+
+### Delete all data
+
+You can delete all the data stored by Eyeloupe by clicking on the trash button.
+
+
+## Q/A
+
+### Why the request time is not the same on rack-mini-profiler ?
+
+Eyeloupe is not a performance-oriented tool, the request time is the same you can view in the Rails log. If you want more details about your load time, you can use rack-mini-profiler along with Eyeloupe.
+
+### Is this the Laravel Telescope for Rails ?
+
+Yes, Eyeloupe is inspired by Laravel Telescope. Lot of people coming from Laravel are missing Telescope or looking for something similar, so Eyeloupe is here to fill this gap.
+
+## Roadmap
+
+- [ ] Exceptions - Track all the exceptions thrown by your application
+- [ ] Custom links to the menu - To access all of your debug tool in one place (Sidekiq web, Mailhog, etc.)
 
 ## Contributing
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -59,7 +105,6 @@ Don't forget to give the project a star! Thanks again!
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
 
 ## Contact
 
