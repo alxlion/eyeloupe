@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.email       = ["dev@alexandrelion.com"]
   spec.homepage    = "https://github.com/alxlion/eyeloupe"
   spec.summary     = "The elegant Rails debug assistant"
-  spec.description = "The All in one Rails monitoring tool"
+  spec.description = "Eyeloupe is debug assistant for Rails. It provides a simple and elegant way to debug your Rails application."
   spec.license     = "MIT"
 
   spec.metadata["homepage_uri"] = spec.homepage
@@ -20,10 +20,10 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.7"
 
-  spec.add_dependency "sprockets-rails", ">= 3.4"
-  spec.add_dependency "rails",        ">= 7.0"
-  spec.add_dependency "importmap-rails", ">= 1.1"
-  spec.add_dependency "pagy",            ">= 6.0"
+  spec.add_dependency "sprockets-rails", "~> 3.4"
+  spec.add_dependency "rails",        "~> 7.0"
+  spec.add_dependency "importmap-rails", "~> 1.1"
+  spec.add_dependency "pagy",            "~> 6.0"
 
   spec.add_development_dependency "sqlite3", "~> 1.3.6"
   spec.add_development_dependency "tailwindcss-rails", "~> 2.0"
