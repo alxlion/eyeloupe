@@ -50,5 +50,8 @@ jobs:
         run: |
           bin/rails db:setup
 
+      - name: Run bundler
+        run: bundle install
+
       - name: Run tests
         run: bin/rails test
