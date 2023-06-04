@@ -109,7 +109,7 @@ module Eyeloupe
           "HTML content"
         elsif @response.is_a?(ActionDispatch::Response)
           @response.body
-        elsif @response.is_a?(Rack::BodyProxy)
+        elsif @response.is_a?(Rack::BodyProxy) && @response.respond_to?(:first)
           @response.first
         else
           @response
