@@ -12,7 +12,7 @@
     <img src="app/assets/images/eyeloupe/logo.png" width=120 alt="Logo" >
   </a>
 
-<h3 align="center">Eyeloupe</h3>
+<h3 align="center">Eyeloupe (beta)</h3>
 
   <p align="center">
     The elegant Rails debug assistant.
