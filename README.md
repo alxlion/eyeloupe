@@ -1,3 +1,5 @@
+[![Gem Version][gem-version]][gem-url]
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -23,7 +25,7 @@
 
 [![Eyeloupe screenshot][eyeloupe-screen]](https://github.com/alxlion/eyeloupe)
 
-Eyeloupe is the elegant Rails debug assistant. It helps you to debug your Rails application by providing a simple and elegant interface to view your incoming and outgoing requests, and a lot more.
+Eyeloupe is the elegant Rails debug assistant. It helps you to debug your Rails application by providing a simple and elegant interface to view your incoming and outgoing requests (and a lot more to come).
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -47,13 +49,18 @@ And run the migrations:
 $ rails db:migrate
 ```
 
+To access Eyeloupe dashboard you need to add the following route to your `config/routes.rb` file:
+```ruby
+mount Eyeloupe::Engine => "/eyeloupe"
+```
+
 ## Configuration
 
 This is an example of the configuration you can add to your `initializers/eyeloupe.rb` file:
 
 ```ruby
 Eyeloupe.configure do |config|
-  config.excluded_paths = %w[assets favicon.ico dance.riv service-worker.js manifest.json]
+  config.excluded_paths = %w[assets favicon.ico service-worker.js manifest.json]
   config.capture = true
 end
 ```
@@ -63,7 +70,7 @@ end
 
 ## Usage
 
-Eyeloupe is exclusively developed for Rails framework.
+Eyeloupe is exclusively developed for the Rails framework.
 
 You can use it in your development environment to debug your application but it's not recommended to use it in production.
 
@@ -84,7 +91,7 @@ Eyeloupe is not a performance-oriented tool, the request time is the same you ca
 
 ### Is this the Laravel Telescope for Rails ?
 
-Yes, Eyeloupe is inspired by Laravel Telescope. Lot of people coming from Laravel are missing Telescope or looking for something similar, so Eyeloupe is here to fill this gap.
+Yes, Eyeloupe is inspired by Laravel Telescope. A lot of people coming from Laravel are missing Telescope or looking for something similar, so Eyeloupe is here to fill this gap.
 
 ## Roadmap
 
@@ -92,7 +99,7 @@ Yes, Eyeloupe is inspired by Laravel Telescope. Lot of people coming from Larave
 - [ ] Custom links to the menu - To access all of your debug tool in one place (Sidekiq web, Mailhog, etc.)
 
 ## Contributing
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
@@ -127,3 +134,5 @@ Project Link: [https://github.com/alxlion/eyeloupe](https://github.com/alxlion/e
 [license-shield]: https://img.shields.io/github/license/alxlion/eyeloupe.svg?style=for-the-badge
 [license-url]: https://github.com/alxlion/eyeloupe/blob/master/MIT-LICENSE.txt
 [eyeloupe-screen]: /doc/img/screen.png
+[gem-version]: https://badge.fury.io/rb/eyeloupe.svg
+[gem-url]: https://rubygems.org/gems/eyeloupe

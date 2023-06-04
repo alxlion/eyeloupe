@@ -2,10 +2,10 @@ PATH
   remote: .
   specs:
     eyeloupe (0.1.0)
-      importmap-rails (>= 1.1)
-      pagy (>= 6.0)
-      rails (>= 7.0)
-      sprockets-rails (>= 3.4)
+      importmap-rails (~> 1.1)
+      pagy (~> 6.0)
+      rails (~> 7.0)
+      sprockets-rails (~> 3.4)
 
 GEM
   remote: https://rubygems.org/
