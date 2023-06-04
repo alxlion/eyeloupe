@@ -7,7 +7,9 @@ module Eyeloupe
     # Delete all data in the database
     # DELETE /data
     def destroy
+      Exception.destroy_all
       InRequest.destroy_all
+      OutRequest.destroy_all
       redirect_to root_path, status: 303
     end
   end

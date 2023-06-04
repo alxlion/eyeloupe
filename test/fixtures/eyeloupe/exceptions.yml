@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hostname: MyString
+  kind: MyString
+  location: MyString
+  stacktrace: MyText
+  message: MyString
+  count: 1
+
+two:
+  hostname: MyString
+  kind: MyString
+  location: MyString
+  stacktrace: MyText
+  message: MyString
+  count: 1

@@ -4,6 +4,7 @@ Eyeloupe::Engine.routes.draw do
 
   resources :in_requests, only: [:index, :show]
   resources :out_requests, only: [:index, :show]
+  resources :exceptions, only: [:index, :show]
 
   resource :data, only: [:destroy]
 

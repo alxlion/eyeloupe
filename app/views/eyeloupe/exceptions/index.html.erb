@@ -1,0 +1,13 @@
+<div>
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-xl font-semibold leading-6 text-gray-900">Exceptions</h1>
+      <p class="mt-2 text-sm text-gray-700">All exceptions that have been raised in the application.</p>
+    </div>
+    <div>
+    </div>
+  </div>
+  <div class="mt-8 flow-root">
+    <%= turbo_frame_tag "frame", src: exceptions_path(frame: true), data: {"eyeloupe--refresh-target": "frame"} do %><% end %>
+  </div>
+</div>

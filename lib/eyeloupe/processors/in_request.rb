@@ -31,6 +31,9 @@ module Eyeloupe
       # @return [Array]
       attr_accessor :subs
 
+      # @return [Eyeloupe::Exception, nil]
+      attr_accessor :ex
+
       def initialize
         @env = {}
         @request = ActionDispatch::Request.new(@env)
@@ -40,6 +43,7 @@ module Eyeloupe
         @timings = {}
         @started_at = nil
         @subs = []
+        @ex = nil
       end
 
       # @param [ActionDispatch::Request] request The request object
@@ -47,8 +51,9 @@ module Eyeloupe
       # @param [Integer, nil] status HTTP status code
       # @param [Hash, nil] headers HTTP headers
       # @param [String, nil] response HTTP response
+      # @param [Eyeloupe::Exception, nil] ex The exception object persisted in db
       # @return [Eyeloupe::Processors::InRequest]
-      def init(request, env, status, headers, response)
+      def init(request, env, status, headers, response, ex)
         unsubscribe
 
         @request = request
@@ -56,6 +61,7 @@ module Eyeloupe
         @status = status
         @headers = headers
         @response = response
+        @ex = ex
 
         self
       end
@@ -72,7 +78,8 @@ module Eyeloupe
 
       # @return [Eyeloupe::InRequest]
       def process
-        Eyeloupe::InRequest.create(
+
+        req = Eyeloupe::InRequest.create(
           verb: @request.request_method,
           hostname: @request.host,
           path: @env["REQUEST_URI"],
@@ -88,6 +95,8 @@ module Eyeloupe
           session: (@request.session || {}).to_json,
           response: get_response,
         )
+
+        @ex.update(eyeloupe_in_request_id: req.id) if @ex.present? && @ex.eyeloupe_in_request_id.blank?
       end
 
       protected
