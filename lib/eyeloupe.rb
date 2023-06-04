@@ -7,6 +7,7 @@ require 'eyeloupe/http'
 require 'eyeloupe/processors/in_request'
 require 'eyeloupe/processors/out_request'
 
+require 'pagy'
 module Eyeloupe
 
   # @return [Eyeloupe::Configuration]
