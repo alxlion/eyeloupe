@@ -61,7 +61,7 @@ This is an example of the configuration you can add to your `initializers/eyelou
 ```ruby
 Eyeloupe.configure do |config|
   config.excluded_paths = %w[assets favicon.ico service-worker.js manifest.json]
-  config.capture = true
+  config.capture = Rails.env.development?
 end
 ```
 
