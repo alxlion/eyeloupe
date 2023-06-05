@@ -1,4 +1,4 @@
-<div>
+<div class="px-4 sm:px-6 lg:px-8 bg-white rounded-md shadow-md py-5">
   <div class="px-4 sm:px-0">
     <h3 class="text-xl font-semibold leading-7 text-gray-900">Exception Details</h3>
   </div>
@@ -26,11 +26,11 @@
           <%= @exception.count %>
         </dd>
       </div>
-      <% if @exception.eyeloupe_in_request_id.present? %>
+      <% if @exception.in_request_id.present? %>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-base font-medium leading-6 text-gray-900">Request</dt>
         <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-          <%= link_to "View request", in_request_path(@exception.eyeloupe_in_request_id), class: "underline" %>
+          <%= link_to "View request", in_request_path(@exception.in_request_id), class: "underline" %>
         </dd>
       </div>
       <% end %>
@@ -47,9 +47,9 @@
         </dd>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-base font-medium leading-6 text-gray-900">Details</dt>
+        <dt class="text-base font-medium leading-6 text-gray-900">Code preview</dt>
         <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0 rounded-md bg-black text-white overflow-x-auto">
-          <pre class="p-2"><%= @exception.full_message %></pre>
+          <pre class="p-2"><%= @exception.location %></pre>
         </dd>
       </div>
     </dl>

@@ -101,7 +101,7 @@
               <%= image_tag "eyeloupe/logo.png", class: "h-12 w-auto" %>
               <h1 class="ml-2 text-2xl font-semibold text-gray-700">Eyeloupe</h1>
             <% end  %>
-            <nav class="flex flex-1 flex-col">
+            <nav class="flex flex-1 flex-col mt-4">
               <ul role="list" class="flex flex-1 flex-col gap-y-7">
                 <li>
                   <ul role="list" class="-mx-2 space-y-1">
@@ -225,10 +225,7 @@
       </div>
 
       <main class="py-10 lg:pl-72 px-5 mx-auto">
-
-        <div class="px-4 sm:px-6 lg:px-8 bg-white rounded-md shadow-md py-5">
-          <%= yield %>
-        </div>
+        <%= yield %>
       </main>
     </div>
   </div>

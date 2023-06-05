@@ -8,7 +8,7 @@ class CreateEyeloupeExceptions < ActiveRecord::Migration[7.0]
       t.string :message
       t.integer :count, default: 1
       t.text :full_message
-      t.references :eyeloupe_in_request, null: true, foreign_key: true
+      t.references :in_request, null: true, foreign_key: true
 
       t.timestamps
     end

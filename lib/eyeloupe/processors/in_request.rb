@@ -96,7 +96,7 @@ module Eyeloupe
           response: get_response,
         )
 
-        @ex.update(eyeloupe_in_request_id: req.id) if @ex.present? && @ex.eyeloupe_in_request_id.blank?
+        @ex.update(in_request_id: req.id) if @ex.present? && @ex.in_request_id.blank?
       end
 
       protected

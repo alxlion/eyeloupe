@@ -18,18 +18,33 @@ module Eyeloupe
 
         if existing
           existing.update(count: existing.count + 1)
-          ex = existing
+          existing
         else
-          ex = Eyeloupe::Exception.create(
+          Eyeloupe::Exception.create(
             hostname: ActionDispatch::Request.new(env).host,
             kind: exception.class.name,
             message: exception.message,
             full_message: exception.full_message,
+            location: read_file(backtrace || []),
             stacktrace: backtrace || [],
             )
         end
+      end
 
-        ex
+      protected
+
+      def read_file(trace)
+        file = trace[0].split(":")[0]
+        line = trace[0].split(":")[1].to_i
+
+        if File.exist?(file)
+          lines = File.readlines(file)
+          start = line - 5
+          start = 0 if start < 0
+          lines[start..line+5].join("")
+        else
+          ""
+        end
       end
     end
   end

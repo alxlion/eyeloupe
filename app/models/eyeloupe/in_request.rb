@@ -1,5 +1,5 @@
 module Eyeloupe
   class InRequest < ApplicationRecord
-    has_many :exceptions
+    has_one :exception, class_name: "Eyeloupe::Exception"
   end
 end
