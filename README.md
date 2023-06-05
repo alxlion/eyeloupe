@@ -1,4 +1,4 @@
-[![Gem Version][gem-version]][gem-url]
+[![Gem Version](https://badge.fury.io/rb/eyeloupe.svg)](https://badge.fury.io/rb/eyeloupe)
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
