@@ -1,17 +1,25 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  hostname: MyString
-  kind: MyString
-  location: MyString
-  stacktrace: MyText
-  message: MyString
+  hostname: example.com
+  kind: KindException
+  location: ["test"]
+  stacktrace: ["a", "b"]
+  message: "message"
+  full_message: "full_message"
+  in_request_id: one
   count: 1
+  file: "file.rb"
+  line: 1
 
 two:
-  hostname: MyString
-  kind: MyString
-  location: MyString
-  stacktrace: MyText
-  message: MyString
-  count: 1
+  hostname: example2.com
+  kind: Kind2Exception
+  location: []
+  stacktrace: [ "a", "b", "c" ]
+  message: "message"
+  full_message: "full_message"
+  in_request_id: two
+  count: 4
+  file: "file.rb"
+  line: 123

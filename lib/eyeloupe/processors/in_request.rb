@@ -97,6 +97,8 @@ module Eyeloupe
         )
 
         @ex.update(in_request_id: req.id) if @ex.present? && @ex.in_request_id.blank?
+
+        req
       end
 
       protected

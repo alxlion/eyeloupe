@@ -17,39 +17,54 @@ module Eyeloupe
         file = backtrace ? backtrace[0].split(":")[0] : ""
         line = backtrace ? backtrace[0].split(":")[1].to_i : 0
 
-        existing = Eyeloupe::Exception.where(kind: exception.class.name, file: file, line: line).first
+        create_or_update_exception(env, exception.class.name || "", file, line, backtrace, exception.message, exception.full_message)
+      end
 
-        if existing
-          existing.update(count: existing.count + 1)
-          existing
+      protected
+
+      # @param [Array] trace The backtrace
+      # @return [Array] The source code lines
+      def read_file(trace)
+        file = trace.size > 0 ? trace[0].split(":")[0] : ""
+        line = trace.size > 0 ? trace[0].split(":")[1].to_i : 0
+
+        if File.exist?(file)
+          lines = File.readlines(file)
+          start = line - 5
+          start = 0 if start < 0
+          lines[start..line+5] || []
         else
-          Eyeloupe::Exception.create(
+          []
+        end
+      end
+
+      # @param [Hash] env Rack environment
+      # @param [String] kind The exception class name
+      # @param [String] file The file path
+      # @param [Integer] line The line number
+      # @param [Array] backtrace The backtrace
+      # @param [String] message The exception message
+      # @param [String] full_message The full exception message
+      # @return [Eyeloupe::Exception] The exception model
+      def create_or_update_exception(env, kind, file, line, backtrace, message, full_message)
+        obj = Eyeloupe::Exception.find_by(kind: kind, file: file, line: line)
+
+        if obj
+          obj.update(count: obj.count + 1)
+        else
+          obj = Eyeloupe::Exception.create(
             hostname: ActionDispatch::Request.new(env).host,
-            kind: exception.class.name,
-            message: exception.message,
-            full_message: exception.full_message,
+            kind: kind,
+            message: message,
+            full_message: full_message,
             location: read_file(backtrace || []),
             file: file,
             line: line,
             stacktrace: backtrace || [],
             )
         end
-      end
 
-      protected
-
-      def read_file(trace)
-        file = trace[0].split(":")[0]
-        line = trace[0].split(":")[1].to_i
-
-        if File.exist?(file)
-          lines = File.readlines(file)
-          start = line - 5
-          start = 0 if start < 0
-          lines[start..line+5]
-        else
-          []
-        end
+        obj
       end
     end
   end

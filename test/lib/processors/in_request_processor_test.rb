@@ -29,20 +29,20 @@ class InRequestProcessorTest < ActiveSupport::TestCase
 
   test "should unsubscribe after process" do
     @inrequest_processor.start_timer
-    @inrequest_processor.init(@request, @env, 200, {}, "")
+    @inrequest_processor.init(@request, @env, 200, {}, "", nil)
     assert_not_nil @inrequest_processor.process
     assert @inrequest_processor.subs.size == 0
   end
 
   test "should have correct total duration without timings" do
     @inrequest_processor.start_timer
-    @inrequest_processor.init(@request, @env, 200, {}, "")
+    @inrequest_processor.init(@request, @env, 200, {}, "", nil)
     assert_not_equal 0, @inrequest_processor.send(:get_total_duration)
   end
 
   test "should have correct total duration with timings" do
     @inrequest_processor.start_timer
-    @inrequest_processor.init(@request, @env, 200, {}, "")
+    @inrequest_processor.init(@request, @env, 200, {}, "", nil)
     @inrequest_processor.timings = {
       controller_time: 1,
     }
@@ -54,7 +54,7 @@ class InRequestProcessorTest < ActiveSupport::TestCase
     @env['HTTP_ACCEPT'] = "text/html"
     @request = ActionDispatch::Request.new(@env)
 
-    @inrequest_processor.init(@request, @env, 200, {}, "")
+    @inrequest_processor.init(@request, @env, 200, {}, "", nil)
 
     assert_equal "HTML content", @inrequest_processor.send(:get_response)
   end
@@ -63,27 +63,27 @@ class InRequestProcessorTest < ActiveSupport::TestCase
     @inrequest_processor.start_timer
     @request.format = nil
     response = ActionDispatch::Response.new(200, {}, "test")
-    @inrequest_processor.init(@request, @env, 200, {}, response)
+    @inrequest_processor.init(@request, @env, 200, {}, response, nil)
     assert_equal "test", @inrequest_processor.send(:get_response)
   end
 
   test "should get correct response for non body response" do
     @inrequest_processor.start_timer
     @request.format = nil
-    @inrequest_processor.init(@request, @env, 200, {}, "test2")
+    @inrequest_processor.init(@request, @env, 200, {}, "test2", nil)
     assert_equal "test2", @inrequest_processor.send(:get_response)
   end
 
   test "should get correct controller with no controller class" do
     @inrequest_processor.start_timer
-    @inrequest_processor.init(@request, @env, 200, {}, "")
+    @inrequest_processor.init(@request, @env, 200, {}, "", nil)
     assert_nil @inrequest_processor.send(:get_controller)
   end
 
   test "should get correct controller with controller class" do
     @inrequest_processor.start_timer
     @request.path_parameters = { controller: "eyeloupe/in_requests", action: "index" }
-    @inrequest_processor.init(@request, @env, 200, {}, "")
+    @inrequest_processor.init(@request, @env, 200, {}, "", nil)
     assert_equal "Eyeloupe::InRequestsController#index", @inrequest_processor.send(:get_controller)
   end
 end

@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_125352) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_04_190442) do
+  create_table "eyeloupe_exceptions", force: :cascade do |t|
+    t.string "hostname"
+    t.string "kind"
+    t.string "location"
+    t.string "file"
+    t.integer "line"
+    t.text "stacktrace"
+    t.string "message"
+    t.integer "count", default: 1
+    t.text "full_message"
+    t.integer "in_request_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["in_request_id"], name: "index_eyeloupe_exceptions_on_in_request_id"
+    t.index ["kind", "file", "line"], name: "index_eyeloupe_exceptions_on_kind_and_file_and_line"
+  end
+
   create_table "eyeloupe_in_requests", force: :cascade do |t|
     t.string "verb"
     t.string "hostname"
@@ -45,4 +62,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_125352) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "eyeloupe_exceptions", "eyeloupe_in_requests", column: "in_request_id"
 end
