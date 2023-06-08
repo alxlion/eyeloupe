@@ -14,6 +14,9 @@ module Eyeloupe
 
     # GET /out_requests/1
     def show
+      start = @exception.line - 5
+      start = 0 if start < 0
+      @line_numbers = [*start..@exception.line+5]
     end
 
     private

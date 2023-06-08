@@ -43,7 +43,9 @@ export default class extends Controller {
     }
 
     _fetch() {
-        this.frameTarget.reload()
+        if (this.hasFrameTarget) {
+            this.frameTarget.reload()
+        }
     }
 
     get enabled() {

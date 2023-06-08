@@ -14,7 +14,10 @@ module Eyeloupe
           backtrace = exception.backtrace
         end
 
-        existing = Eyeloupe::Exception.where(kind: exception.class.name, message: exception.message).first
+        file = backtrace ? backtrace[0].split(":")[0] : ""
+        line = backtrace ? backtrace[0].split(":")[1].to_i : 0
+
+        existing = Eyeloupe::Exception.where(kind: exception.class.name, file: file, line: line).first
 
         if existing
           existing.update(count: existing.count + 1)
@@ -26,6 +29,8 @@ module Eyeloupe
             message: exception.message,
             full_message: exception.full_message,
             location: read_file(backtrace || []),
+            file: file,
+            line: line,
             stacktrace: backtrace || [],
             )
         end
@@ -41,9 +46,9 @@ module Eyeloupe
           lines = File.readlines(file)
           start = line - 5
           start = 0 if start < 0
-          lines[start..line+5].join("")
+          lines[start..line+5]
         else
-          ""
+          []
         end
       end
     end

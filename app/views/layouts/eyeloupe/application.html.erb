@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <%= stylesheet_link_tag "eyeloupe", media: "all" %>
+  <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
 </head>
 <body class="bg-gray-50">
 
@@ -227,6 +228,11 @@
       <main class="py-10 lg:pl-72 px-5 mx-auto">
         <%= yield %>
       </main>
+
+      <footer class="text-gray-500 py-1 lg:pl-72 px-5 mx-auto text-sm">
+        Eyeloupe v<%= Eyeloupe::VERSION %> - <a class="underline" href="https://github.com/alxlion/eyeloupe">Github</a>
+      </footer>
+
     </div>
   </div>
 

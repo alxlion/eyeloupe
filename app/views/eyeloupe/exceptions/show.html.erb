@@ -41,15 +41,20 @@
         </dd>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-base font-medium leading-6 text-gray-900">Stacktrace</dt>
+        <dt class="text-base font-medium leading-6 text-gray-900">Backtrace</dt>
         <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0 rounded-md bg-black text-white overflow-x-auto">
           <pre class="p-2"><%= @exception.stacktrace.gsub("[", "").gsub("]", "").gsub("\"", "").split(", ").join(", \n") %></pre>
         </dd>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-base font-medium leading-6 text-gray-900">Code preview</dt>
-        <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0 rounded-md bg-black text-white overflow-x-auto">
-          <pre class="p-2"><%= @exception.location %></pre>
+        <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0 rounded-md bg-black text-white overflow-x-auto px-2 pt-2">
+          <% @exception.location.gsub("[", "").gsub("]", "").gsub("\\n", "").gsub("\\", "").split(", ").each_with_index do |line, i| %>
+            <div class="grid grid-cols-12 gap-x-1 <%= @line_numbers[i] + 1 == @exception.line ? "bg-red-500 bg-opacity-30" : "" %>">
+              <span class="text-right col-span-1 font-medium text-base text-gray-300"><%= @line_numbers[i] + 1 %></span>
+              <pre class="col-span-11"><code class="!p-0"><%= line[1..line.size-2] %></code></pre>
+            </div>
+          <% end %>
         </dd>
       </div>
     </dl>
