@@ -3,8 +3,8 @@
 one:
   hostname: example.com
   kind: KindException
-  location: ["test"]
-  stacktrace: ["a", "b"]
+  location: '["test"]'
+  stacktrace: '[ "a", "b" ]'
   message: "message"
   full_message: "full_message"
   in_request_id: one
@@ -15,11 +15,23 @@ one:
 two:
   hostname: example2.com
   kind: Kind2Exception
-  location: []
-  stacktrace: [ "a", "b", "c" ]
+  location: '[]'
+  stacktrace: '[ "a", "b", "c" ]'
   message: "message"
   full_message: "full_message"
   in_request_id: two
   count: 4
   file: "file.rb"
   line: 123
+
+three:
+  hostname: example3.com
+  kind: Kind3Exception
+  location: '[]'
+  stacktrace: '[ "a", "b", "c" ]'
+  message: "message3"
+  full_message: "full_message"
+  out_request_id: two
+  count: 4
+  file: "file.rb"
+  line: 4

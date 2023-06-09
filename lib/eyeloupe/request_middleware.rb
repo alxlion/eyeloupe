@@ -37,7 +37,7 @@ module Eyeloupe
           status = exception.status_code
           headers = {}
           response = e.message
-          ex = @exception_processor.process(env, framework_exception)
+          ex = @exception_processor.process(env, e)
           raise
         ensure
           @inrequest_processor.init(request, env, status, headers, response, ex).process

@@ -18,7 +18,7 @@
             <tr>
               <td class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-medium text-gray-900 sm:pl-0">
                 <%= ex.kind %>
-                <p class="text-sm font-normal text-gray-500"><%= ex.message %></p>
+                <p class="text-sm font-normal text-gray-500"><%= ex.message.truncate(100) %></p>
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-base text-gray-500"><%= ex.count %></td>
               <td class="whitespace-nowrap px-3 py-4 text-base text-gray-500"><%= distance_of_time_in_words(ex.created_at, DateTime.now) %></td>

@@ -11,6 +11,7 @@ class CreateEyeloupeExceptions < ActiveRecord::Migration[7.0]
       t.integer :count, default: 1
       t.text :full_message
       t.references :in_request, null: true, foreign_key: { to_table: :eyeloupe_in_requests }
+      t.references :out_request, null: true, foreign_key: { to_table: :eyeloupe_out_requests }
 
       t.timestamps
     end

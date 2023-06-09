@@ -67,3 +67,19 @@
     </dl>
   </div>
 </div>
+
+<% if @request.exception.present? %>
+  <div class="mt-6 bg-white rounded-md shadow-md py-5">
+    <h3 class="text-base font-semibold leading-6 text-gray-900 px-4 sm:px-6 lg:px-8 border-b border-gray-100 pb-3">Exceptions</h3>
+
+    <%= link_to exception_path(@request.exception), class: "text-gray-600 hover:text-gray-900 hover:bg-gray-100 block px-4 sm:px-6 lg:px-8", data: {"turbo_frame": "_top"} do %>
+      <div class="divide-y divide-gray-100 px-0 flex justify-between">
+        <div class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-medium text-gray-900 sm:pl-0">
+          <%= @request.exception.kind %>
+          <p class="text-sm font-normal text-gray-500"><%= @request.exception.message %></p>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+<% end %>

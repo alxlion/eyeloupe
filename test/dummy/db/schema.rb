@@ -22,10 +22,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_190442) do
     t.integer "count", default: 1
     t.text "full_message"
     t.integer "in_request_id"
+    t.integer "out_request_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["in_request_id"], name: "index_eyeloupe_exceptions_on_in_request_id"
     t.index ["kind", "file", "line"], name: "index_eyeloupe_exceptions_on_kind_and_file_and_line"
+    t.index ["out_request_id"], name: "index_eyeloupe_exceptions_on_out_request_id"
   end
 
   create_table "eyeloupe_in_requests", force: :cascade do |t|
@@ -63,4 +65,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_190442) do
   end
 
   add_foreign_key "eyeloupe_exceptions", "eyeloupe_in_requests", column: "in_request_id"
+  add_foreign_key "eyeloupe_exceptions", "eyeloupe_out_requests", column: "out_request_id"
 end

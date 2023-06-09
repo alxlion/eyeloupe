@@ -11,25 +11,13 @@ module Eyeloupe
       # @return [String]
       attr_accessor :body
 
-      # @return [Hash]
-      attr_accessor :req_headers
-
-      # @return [Hash]
-      attr_accessor :res_headers
-
-      # @return [Net::HTTPResponse, nil]
-      attr_accessor :response
-
       # @return [Time, nil]
       attr_accessor :started_at
 
       def initialize
         @request = nil
         @body = ""
-        @req_headers = {}
-        @res_headers = {}
         @started_at = nil
-        @response = nil
       end
 
       # @param [Net::HTTPRequest] request The request object
@@ -41,22 +29,24 @@ module Eyeloupe
       end
 
       # @param [Net::HTTPResponse] response The response object
+      # @param [Eyeloupe::Exception, nil] ex The exception object persisted in db
       # @return [Net::HTTPResponse] The response object
-      def process(response)
-        @response = response
-
-        Eyeloupe::OutRequest.create(
+      def process(response, ex)
+        req = Eyeloupe::OutRequest.create(
           verb: @request.method,
           hostname: @request['host'],
           path: @request.path,
-          status: @response.code,
-          format: @response.content_type,
+          status: response.code,
+          format: response.content_type,
           duration: (Time.now - @started_at) * 1000,
           payload: @request.body,
           req_headers: (get_headers(@request) || {}).to_json,
-          res_headers: (get_headers(@response) || {}).to_json,
-          response: @response.body,
+          res_headers: (get_headers(response) || {}).to_json,
+          response: response.body,
           )
+
+        ex.update(out_request_id: req.id) if ex.present? && ex.out_request_id.blank?
+
         response
       end
 

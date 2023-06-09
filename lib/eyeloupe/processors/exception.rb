@@ -3,7 +3,7 @@ module Eyeloupe
     class Exception
       include Singleton
 
-      # @param [Hash] env Rack environment
+      # @param [Hash, nil] env Rack environment
       # @param [Exception] exception The exception object
       # @return [Eyeloupe::Exception] The exception model
       def process(env, exception)
@@ -38,7 +38,7 @@ module Eyeloupe
         end
       end
 
-      # @param [Hash] env Rack environment
+      # @param [Hash, nil] env Rack environment
       # @param [String] kind The exception class name
       # @param [String] file The file path
       # @param [Integer] line The line number
@@ -57,10 +57,10 @@ module Eyeloupe
             kind: kind,
             message: message,
             full_message: full_message,
-            location: read_file(backtrace || []),
+            location: read_file(backtrace || []).to_json,
             file: file,
             line: line,
-            stacktrace: backtrace || [],
+            stacktrace: (backtrace || []).to_json,
             )
         end
 

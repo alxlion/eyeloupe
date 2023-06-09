@@ -68,6 +68,14 @@ end
 - `excluded_paths` is an array of paths you want to exclude from Eyeloupe capture. Eyeloupe adds these excluded paths to the default ones: ` %w[mini-profiler eyeloupe active_storage]`
 - `capture` is a boolean to enable/disable Eyeloupe capture. By default, it's set to `true`.
 
+### Exception handling
+
+To be able to handle exceptions, be sure to disable the default Rails exception handling in your environment config file (e.g. `config/environments/development.rb`):
+
+```ruby
+config.consider_all_requests_local = false
+```
+
 ## Usage
 
 Eyeloupe is exclusively developed for the Rails framework.
@@ -82,7 +90,14 @@ By activating auto-fresh, every _3 seconds_ the page will be refreshed to show y
 
 You can delete all the data stored by Eyeloupe by clicking on the trash button.
 
+## Upgrade
 
+When your upgrade Eyeloupe to the latest version, be sure to run the following commands:
+
+```bash
+$ rails eyeloupe:install:migrations
+$ rails db:migrate
+```
 ## Q/A
 
 ### Why the request time is not the same on rack-mini-profiler ?

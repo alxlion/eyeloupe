@@ -7,7 +7,7 @@ module Eyeloupe
 
     # GET /out_requests
     def index
-      @pagy, @exceptions = pagy(Exception.all, items: 50)
+      @pagy, @exceptions = pagy(Exception.all.order(created_at: :desc), items: 50)
 
       render partial: 'frame' if params[:frame].present?
     end
@@ -16,7 +16,7 @@ module Eyeloupe
     def show
       start = @exception.line - 5
       start = 0 if start < 0
-      @line_numbers = [*start..@exception.line+5]
+      @line_numbers = [*start..@exception.line+6]
     end
 
     private
