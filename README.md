@@ -122,8 +122,10 @@ Yes, Eyeloupe is inspired by Laravel Telescope. A lot of people coming from Lara
 
 ## Roadmap
 
-- [ ] Exceptions - Track all the exceptions thrown by your application
+- [x] Exceptions - Track all the exceptions thrown by your application
+- [x] AI assistant - Use OpenAI API to help you to solve your exceptions
 - [ ] Custom links to the menu - To access all of your debug tool in one place (Sidekiq web, Mailhog, etc.)
+- [ ] Refactoring / clean code - To make the code more readable and maintainable
 
 ## Contributing
 Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
