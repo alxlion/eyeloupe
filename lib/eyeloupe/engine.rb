@@ -32,6 +32,32 @@ module Eyeloupe
       end
     end
 
+    initializer 'eyeloupe.override_net_http_request' do
+      require 'net/http'
+      Net::HTTP.class_eval do
+        alias original_request request
+        def request(req, body = nil, &block)
+          res, ex = nil
+          exception_processor = Eyeloupe::Processors::Exception.instance
+          out_request_processor = Eyeloupe::Processors::OutRequest.instance
+
+          if Eyeloupe.configuration.capture
+            begin
+              out_request_processor.init(req, body)
+              res = original_request(req, body, &block)
+            rescue => e
+              ex = exception_processor.process(nil, e)
+            ensure
+              out_request_processor.process(res, ex)
+            end
+          else
+            res = original_request(req, body, &block)
+          end
+          res
+        end
+      end
+    end
+
     initializer "eyeloupe.importmap", :before => "importmap" do |app|
       app.config.importmap.paths << root.join("config/importmap.rb")
       # https://github.com/rails/importmap-rails#sweeping-the-cache-in-development-and-test
