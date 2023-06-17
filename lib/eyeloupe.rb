@@ -10,6 +10,7 @@ require 'eyeloupe/processors/exception'
 require 'eyeloupe/concerns/rescuable'
 
 require 'pagy'
+require "openai"
 module Eyeloupe
 
   # @return [Eyeloupe::Configuration]

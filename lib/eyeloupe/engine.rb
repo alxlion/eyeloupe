@@ -18,6 +18,12 @@ module Eyeloupe
       end
     end
 
+    initializer "eyeloupe.configure_openai" do
+      OpenAI.configure do |config|
+        config.access_token = Eyeloupe::configuration.openai_access_key
+      end
+    end
+
     initializer "eyeloupe.configure_sidekiq" do
       if defined?(Sidekiq)
         Sidekiq.configure_server do |config|

@@ -66,6 +66,60 @@
           <% end %>
         </dd>
       </div>
+      <% if Eyeloupe::configuration.openai_access_key.present? %>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0" data-controller="eyeloupe--ai-assistant" data-eyeloupe--ai-assistant-url-value="<%= ai_assistant_response_url(@exception) %>">
+        <dt class="text-base font-medium leading-6 text-gray-900">AI Assistant</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <button data-action="eyeloupe--ai-assistant#assist" data-eyeloupe--ai-assistant-target="btn" class="rounded-md px-2 py-1 text-white bg-red-500 text-xl hover:shadow-md hover:bg-red-400 transition flex gap-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-robot" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M7 7h10a2 2 0 0 1 2 2v1l1 1v3l-1 1v3a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-3l-1 -1v-3l1 -1v-1a2 2 0 0 1 2 -2z"></path>
+              <path d="M10 16h4"></path>
+              <circle cx="8.5" cy="11.5" r=".5" fill="currentColor"></circle>
+              <circle cx="15.5" cy="11.5" r=".5" fill="currentColor"></circle>
+              <path d="M9 7l-1 -4"></path>
+              <path d="M15 7l1 -4"></path>
+            </svg>
+            <span>Click to get some help</span>
+          </button>
+
+          <svg data-eyeloupe--ai-assistant-target="loader" width="50" class="hidden" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="#ff3130">
+            <circle cx="15" cy="15" r="15">
+              <animate attributeName="r" from="15" to="15"
+                       begin="0s" dur="0.8s"
+                       values="15;9;15" calcMode="linear"
+                       repeatCount="indefinite" />
+              <animate attributeName="fill-opacity" from="1" to="1"
+                       begin="0s" dur="0.8s"
+                       values="1;.5;1" calcMode="linear"
+                       repeatCount="indefinite" />
+            </circle>
+            <circle cx="60" cy="15" r="9" fill-opacity="0.3">
+              <animate attributeName="r" from="9" to="9"
+                       begin="0s" dur="0.8s"
+                       values="9;15;9" calcMode="linear"
+                       repeatCount="indefinite" />
+              <animate attributeName="fill-opacity" from="0.5" to="0.5"
+                       begin="0s" dur="0.8s"
+                       values=".5;1;.5" calcMode="linear"
+                       repeatCount="indefinite" />
+            </circle>
+            <circle cx="105" cy="15" r="15">
+              <animate attributeName="r" from="15" to="15"
+                       begin="0s" dur="0.8s"
+                       values="15;9;15" calcMode="linear"
+                       repeatCount="indefinite" />
+              <animate attributeName="fill-opacity" from="1" to="1"
+                       begin="0s" dur="0.8s"
+                       values="1;.5;1" calcMode="linear"
+                       repeatCount="indefinite" />
+            </circle>
+          </svg>
+
+          <p data-eyeloupe--ai-assistant-target="result" id="result"></p>
+        </dd>
+      </div>
+      <% end %>
     </dl>
   </div>
 
