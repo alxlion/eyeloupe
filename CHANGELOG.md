@@ -1,6 +1,8 @@
 ## 0.3.0
 
-- Add exceptions.
+- Add exceptions: Framework + ActiveJob + Sidekiq Worker exceptions.
+- Add OpenAI support for AI assistant in exceptions.
+- Fix exceptions when using importmap binary by adding net/http override in railties initializer.
 
 ## 0.2.0
 
