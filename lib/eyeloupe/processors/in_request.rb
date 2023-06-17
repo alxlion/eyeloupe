@@ -116,7 +116,7 @@ module Eyeloupe
 
       # @return [String, nil]
       def get_response
-        if @request.format.to_s =~ /html/
+        if @request.format.to_s =~ /html/ || @headers&.to_json =~ /html/
           "HTML content"
         elsif @response.is_a?(ActionDispatch::Response)
           @response.body
