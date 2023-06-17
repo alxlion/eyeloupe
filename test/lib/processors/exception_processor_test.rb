@@ -43,11 +43,11 @@ class ExceptionProcessorTest < ActiveSupport::TestCase
   end
 
   test "should update count if already exist" do
-    ex = @exception_processor.send(:create_or_update_exception, @env, "Exception", @sample_file_name, 1, ["file.rb:1"], "message", "full message")
+    ex = @exception_processor.send(:create_or_update_exception, "Exception", @sample_file_name, 1, ["file.rb:1"], "message", "full message")
     assert_not_nil ex
     assert_equal 1, ex.count
 
-    ex = @exception_processor.send(:create_or_update_exception, @env, "Exception", @sample_file_name, 1, ["file.rb:1"], "message", "full message")
+    ex = @exception_processor.send(:create_or_update_exception, "Exception", @sample_file_name, 1, ["file.rb:1"], "message", "full message")
 
     assert_equal 2, ex.count
   end

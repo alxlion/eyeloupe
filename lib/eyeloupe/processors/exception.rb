@@ -1,3 +1,4 @@
+require 'socket'
 module Eyeloupe
   module Processors
     class Exception
@@ -7,7 +8,7 @@ module Eyeloupe
       # @param [Exception] exception The exception object
       # @return [Eyeloupe::Exception] The exception model
       def process(env, exception)
-        if env['action_dispatch.backtrace_cleaner']
+        if env && env['action_dispatch.backtrace_cleaner'].present?
           backtrace = env['action_dispatch.backtrace_cleaner'].filter(exception.backtrace)
           backtrace = exception.backtrace if backtrace.blank?
         else
@@ -17,7 +18,7 @@ module Eyeloupe
         file = backtrace ? backtrace[0].split(":")[0] : ""
         line = backtrace ? backtrace[0].split(":")[1].to_i : 0
 
-        create_or_update_exception(env, exception.class.name || "", file, line, backtrace, exception.message, exception.full_message)
+        create_or_update_exception(exception.class.name || "", file, line, backtrace, exception.message, exception.full_message)
       end
 
       protected
@@ -38,7 +39,6 @@ module Eyeloupe
         end
       end
 
-      # @param [Hash, nil] env Rack environment
       # @param [String] kind The exception class name
       # @param [String] file The file path
       # @param [Integer] line The line number
@@ -46,14 +46,14 @@ module Eyeloupe
       # @param [String] message The exception message
       # @param [String] full_message The full exception message
       # @return [Eyeloupe::Exception] The exception model
-      def create_or_update_exception(env, kind, file, line, backtrace, message, full_message)
+      def create_or_update_exception(kind, file, line, backtrace, message, full_message)
         obj = Eyeloupe::Exception.find_by(kind: kind, file: file, line: line)
 
         if obj
-          obj.update(count: obj.count + 1)
+          obj.update(count: obj.count + 1, updated_at: Time.now)
         else
           obj = Eyeloupe::Exception.create(
-            hostname: ActionDispatch::Request.new(env).host,
+            hostname: Socket.gethostname,
             kind: kind,
             message: message,
             full_message: full_message,

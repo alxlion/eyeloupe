@@ -7,7 +7,7 @@
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-base font-medium leading-6 text-gray-900">Time</dt>
         <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-          <%= @exception.created_at.to_formatted_s(:long) %> (<%= distance_of_time_in_words(@exception.created_at, DateTime.now) %>)
+          <%= @exception.created_at.to_formatted_s(:long) %> (<%= distance_of_time_in_words(@exception.updated_at, DateTime.now) %>)
         </dd>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
