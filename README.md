@@ -15,7 +15,7 @@
 <h3 align="center">Eyeloupe (beta)</h3>
 
   <p align="center">
-    The elegant Rails debug assistant.
+    The elegant Rails debug assistant. AI powered.
     <br />
     <a href="https://github.com/alxlion/eyeloupe/issues">Report Bug</a>
     ·
@@ -25,7 +25,7 @@
 
 [![Eyeloupe screenshot][eyeloupe-screen]](https://github.com/alxlion/eyeloupe)
 
-Eyeloupe is the elegant Rails debug assistant. It helps you to debug your Rails application by providing a simple and elegant interface to view your incoming and outgoing requests (and a lot more to come).
+Eyeloupe is the elegant Rails debug assistant. It helps you to debug your Rails application by providing a simple and elegant interface to view your incoming/outgoing requests and exceptions, powered by AI.
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -62,11 +62,23 @@ This is an example of the configuration you can add to your `initializers/eyelou
 Eyeloupe.configure do |config|
   config.excluded_paths = %w[assets favicon.ico service-worker.js manifest.json]
   config.capture = Rails.env.development?
+  config.openai_access_key = "your-openai-access-key"
+  config.openai_model = "gpt-4"
 end
 ```
 
 - `excluded_paths` is an array of paths you want to exclude from Eyeloupe capture. Eyeloupe adds these excluded paths to the default ones: ` %w[mini-profiler eyeloupe active_storage]`
 - `capture` is a boolean to enable/disable Eyeloupe capture. By default, it's set to `true`.
+- `openai_access_key` is the access key to use the OpenAI API. You can get one [here](https://platform.openai.com/).
+- `openai_model` is the model to use for the OpenAI API. You can find the list of available models [here](https://platform.openai.com/docs/models).
+
+### Exception handling
+
+To be able to handle exceptions, be sure to disable the default Rails exception handling in your environment config file (e.g. `config/environments/development.rb`):
+
+```ruby
+config.consider_all_requests_local = false
+```
 
 ## Usage
 
@@ -82,6 +94,21 @@ By activating auto-fresh, every _3 seconds_ the page will be refreshed to show y
 
 You can delete all the data stored by Eyeloupe by clicking on the trash button.
 
+### AI Assistant
+
+When you define an OpenAI access key in the configuration, you could see a new section in the exception details page. This section is powered by the OpenAI API and it's able to give you a solution to solve your exception.
+It sends the entire content of the file containing the exception to have the best answer to your problem.
+
+![Eyeloupe ai_assistant](/doc/img/ai-assistant.gif)
+
+## Upgrade
+
+When your upgrade Eyeloupe to the latest version, be sure to run the following commands:
+
+```bash
+$ rails eyeloupe:install:migrations
+$ rails db:migrate
+```
 
 ## Q/A
 
@@ -95,8 +122,10 @@ Yes, Eyeloupe is inspired by Laravel Telescope. A lot of people coming from Lara
 
 ## Roadmap
 
-- [ ] Exceptions - Track all the exceptions thrown by your application
+- [x] Exceptions - Track all the exceptions thrown by your application
+- [x] AI assistant - Use OpenAI API to help you to solve your exceptions
 - [ ] Custom links to the menu - To access all of your debug tool in one place (Sidekiq web, Mailhog, etc.)
+- [ ] Refactoring / clean code - To make the code more readable and maintainable
 
 ## Contributing
 Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.

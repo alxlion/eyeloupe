@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hostname: example.com
+  kind: KindException
+  location: '["test"]'
+  stacktrace: '[ "a", "b" ]'
+  message: "message"
+  full_message: "full_message"
+  in_request_id: one
+  count: 1
+  file: "file.rb"
+  line: 1
+
+two:
+  hostname: example2.com
+  kind: Kind2Exception
+  location: '[]'
+  stacktrace: '[ "a", "b", "c" ]'
+  message: "message"
+  full_message: "full_message"
+  in_request_id: two
+  count: 4
+  file: "file.rb"
+  line: 123
+
+three:
+  hostname: example3.com
+  kind: Kind3Exception
+  location: '[]'
+  stacktrace: '[ "a", "b", "c" ]'
+  message: "message3"
+  full_message: "full_message"
+  out_request_id: two
+  count: 4
+  file: "file.rb"
+  line: 4

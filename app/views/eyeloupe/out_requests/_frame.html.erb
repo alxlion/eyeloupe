@@ -23,7 +23,7 @@
                 <%= render "eyeloupe/shared/verb", verb: request.verb %>
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-base text-gray-500"><%= request.hostname %></td>
-              <td class="whitespace-nowrap px-3 py-4 text-base text-gray-500"><%= request.path.truncate(50) %></td>
+              <td class="whitespace-nowrap px-3 py-4 text-base text-gray-500"><%= request.path.truncate(100) %></td>
               <td class="whitespace-nowrap px-3 py-4 text-base text-gray-500">
                 <%= render "eyeloupe/shared/status_code", code: request.status %>
               </td>

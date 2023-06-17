@@ -40,3 +40,11 @@
 .pagination .previous_page, .pagination .next_page {
     @apply hidden;
 }
+
+#result pre {
+    @apply bg-black text-white p-3 rounded-md my-2;
+}
+
+#result p code {
+    @apply bg-gray-200 text-gray-600 px-2 py-0.5 text-sm rounded-md;
+}

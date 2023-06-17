@@ -5,30 +5,42 @@ module Eyeloupe
     # @return [Eyeloupe::Processors::InRequest]
     attr_accessor :inrequest_processor
 
+    # @return [Eyeloupe::Processors::Exception]
+    attr_accessor :exception_processor
+
     def initialize(app)
       @app = app
       @inrequest_processor = Processors::InRequest.instance
+      @exception_processor = Processors::Exception.instance
     end
 
     # @param [Hash] env Rack environment
     def call(env)
 
       request = ActionDispatch::Request.new(env)
+      ex = nil
 
       if enabled?(request) && !skip_request?(request)
         @inrequest_processor.start_timer
 
         begin
           status, headers, response = @app.call(env)
+
+          framework_exception = env['action_dispatch.exception']
+          if framework_exception
+            ex = @exception_processor.process(env, framework_exception)
+          end
+
           [status, headers, response]
         rescue Exception => e
           exception = ActionDispatch::ExceptionWrapper.new(env, e)
           status = exception.status_code
           headers = {}
           response = e.message
+          ex = @exception_processor.process(env, e)
           raise
         ensure
-          @inrequest_processor.init(request, env, status, headers, response).process
+          @inrequest_processor.init(request, env, status, headers, response, ex).process
         end
       else
         @app.call(env)

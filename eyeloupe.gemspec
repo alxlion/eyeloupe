@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails",        "~> 7.0"
   spec.add_dependency "importmap-rails", "~> 1.1"
   spec.add_dependency "pagy",            "~> 6.0"
+  spec.add_dependency "ruby-openai",    "~> 4.1.0"
 
   spec.add_development_dependency "sqlite3", "~> 1.3.6"
   spec.add_development_dependency "tailwindcss-rails", "~> 2.0"
