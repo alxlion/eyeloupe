@@ -64,6 +64,7 @@ Eyeloupe.configure do |config|
   config.capture = Rails.env.development?
   config.openai_access_key = "your-openai-access-key"
   config.openai_model = "gpt-4"
+  config.database = 'eyeloupe'
 end
 ```
 
@@ -71,6 +72,26 @@ end
 - `capture` is a boolean to enable/disable Eyeloupe capture. By default, it's set to `true`.
 - `openai_access_key` is the access key to use the OpenAI API. You can get one [here](https://platform.openai.com/).
 - `openai_model` is the model to use for the OpenAI API. You can find the list of available models [here](https://platform.openai.com/docs/models).
+- `database` is an optional database config Eyeloupe will use ([Database](#database)).
+
+
+### Database
+
+By default, Eyeloupe uses the same database as your application. If you want to use a different database to keep your production environment clean, you can add a new database config in your `config/database.yml` file:
+
+```yml
+development:
+  primary:
+    <<: *default
+    database: db/development.sqlite3
+  eyeloupe:
+    <<: *default
+    database: db/eyeloupe.sqlite3
+    migrations_paths: <%= Gem.loaded_specs['eyeloupe'].full_gem_path + '/db/migrate' %>
+    schema_dump: false
+```
+
+Using this you can skip the `eyeloupe:install:migrations` step, but do not forget to run `rails db:migrate RAILS_ENV=eyeloupe` to setup the database.
 
 ### Exception handling
 

@@ -1,3 +1,7 @@
+## 0.3.1
+
+- Add optional database config
+
 ## 0.3.0
 
 - Add exceptions: Framework + ActiveJob + Sidekiq Worker exceptions.

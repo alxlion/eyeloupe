@@ -5,6 +5,9 @@ module Eyeloupe
   class Configuration
     include Singleton
 
+    # @return [Symbol|Nil]
+    attr_accessor :database
+
     # @return [Array<String>]
     attr_accessor :excluded_paths
 
