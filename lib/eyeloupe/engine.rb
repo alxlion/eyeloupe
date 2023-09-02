@@ -15,6 +15,30 @@ module Eyeloupe
     initializer 'eyeloupe.active_job' do
       ActiveSupport.on_load(:active_job) do
         include Eyeloupe::Concerns::Rescuable
+
+        ActiveSupport::Notifications.subscribe("enqueue_at.active_job") do |*args|
+          Eyeloupe::Processors::Job.instance.process(ActiveSupport::Notifications::Event.new(*args))
+        end
+
+        ActiveSupport::Notifications.subscribe("enqueue.active_job") do |*args|
+          Eyeloupe::Processors::Job.instance.process(ActiveSupport::Notifications::Event.new(*args))
+        end
+
+        ActiveSupport::Notifications.subscribe("perform_start.active_job") do |*args|
+          Eyeloupe::Processors::Job.instance.run(ActiveSupport::Notifications::Event.new(*args))
+        end
+
+        ActiveSupport::Notifications.subscribe("perform.active_job") do |*args|
+          Eyeloupe::Processors::Job.instance.complete(ActiveSupport::Notifications::Event.new(*args))
+        end
+
+        ActiveSupport::Notifications.subscribe("retry_stopped.active_job") do |*args|
+          Eyeloupe::Processors::Job.instance.fail(ActiveSupport::Notifications::Event.new(*args))
+        end
+
+        ActiveSupport::Notifications.subscribe("discard.active_job") do |*args|
+          Eyeloupe::Processors::Job.instance.disacard(ActiveSupport::Notifications::Event.new(*args))
+        end
       end
     end
 
