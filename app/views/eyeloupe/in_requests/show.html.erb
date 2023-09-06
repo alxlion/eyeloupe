@@ -53,7 +53,7 @@
         <dt class="text-base font-medium leading-6 text-gray-900">Payload</dt>
         <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0 rounded-md bg-black text-white overflow-x-auto">
           <% if @request.payload.present? %>
-          <pre class="p-2"><%= @request.payload %></pre>
+          <pre class="p-2"><%= JSON.pretty_generate(Rack::Utils.parse_nested_query(@request.payload)) %></pre>
           <% else %>
           <p class="text-gray-400 p-2">No payload</p>
           <% end %>
