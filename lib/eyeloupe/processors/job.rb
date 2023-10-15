@@ -23,7 +23,7 @@ module Eyeloupe
           scheduled_at: scheduled_at(event),
           status: :enqueued,
           args: (args_info(job) || {}).to_json
-          )
+        )
       end
 
       # @param [ActiveSupport::Notifications::Event] event The event object
@@ -37,11 +37,21 @@ module Eyeloupe
       def complete(event)
         job = event.payload[:job]
 
-        Eyeloupe::Job.where(job_id: job.job_id).update(status: :completed, completed_at: Time.now.utc)
+        existing = Eyeloupe::Job.where(job_id: job.job_id).first
+
+        puts existing.inspect
+
+        puts job.inspect
+
+        if existing.failed?
+          Eyeloupe::Job.where(job_id: job.job_id).update(completed_at: Time.now.utc, retry: existing.retry + 1)
+        else
+          Eyeloupe::Job.where(job_id: job.job_id).update(status: :completed, completed_at: Time.now.utc, retry: job.executions - 1)
+        end
       end
 
       # @param [ActiveSupport::Notifications::Event] event The event object
-      def fail(event)
+      def failed(event)
         job = event.payload[:job]
 
         Eyeloupe::Job.where(job_id: job.job_id).update(status: :failed)

@@ -33,11 +33,11 @@ module Eyeloupe
         end
 
         ActiveSupport::Notifications.subscribe("retry_stopped.active_job") do |*args|
-          Eyeloupe::Processors::Job.instance.fail(ActiveSupport::Notifications::Event.new(*args))
+          Eyeloupe::Processors::Job.instance.failed(ActiveSupport::Notifications::Event.new(*args))
         end
 
         ActiveSupport::Notifications.subscribe("discard.active_job") do |*args|
-          Eyeloupe::Processors::Job.instance.disacard(ActiveSupport::Notifications::Event.new(*args))
+          Eyeloupe::Processors::Job.instance.discard(ActiveSupport::Notifications::Event.new(*args))
         end
       end
     end

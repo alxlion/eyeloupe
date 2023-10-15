@@ -2,14 +2,22 @@
 
 one:
   classname: MyString
-  id: MyString
+  job_id: MyString
   queue_name: MyString
-  enqueued_at: 2023-08-27 18:12:24
+  adapter: MyString
+  status: 0
+  retry: 0
+  executed_at: 2023-08-27 18:12:24
+  completed_at: 2023-08-27 18:12:24
   scheduled_at: 2023-08-27 18:12:24
 
 two:
   classname: MyString
-  id: MyString
+  job_id: MyString2
   queue_name: MyString
-  enqueued_at: 2023-08-27 18:12:24
+  adapter: MyString
+  status: 0
+  retry: 0
+  executed_at: 2023-08-27 18:12:24
+  completed_at: 2023-08-27 18:12:24
   scheduled_at: 2023-08-27 18:12:24

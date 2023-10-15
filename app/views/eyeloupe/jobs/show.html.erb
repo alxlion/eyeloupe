@@ -11,6 +11,12 @@
         </dd>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Duration</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= (@job.completed_at - @job.created_at).round %> seconds
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-base font-medium leading-6 text-gray-900">Name</dt>
         <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @job.classname %></dd>
       </div>
@@ -28,6 +34,12 @@
         <dt class="text-base font-medium leading-6 text-gray-900">Job ID</dt>
         <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
           <%= @job.job_id %>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Retry</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= @job.retry %>
         </dd>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">

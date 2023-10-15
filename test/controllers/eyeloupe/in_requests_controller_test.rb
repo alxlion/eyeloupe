@@ -4,15 +4,19 @@ require "test_helper"
 
 module Eyeloupe
   class InRequestsControllerTest < ActionDispatch::IntegrationTest
-    fixtures "eyeloupe/in_requests"
+    include Engine.routes.url_helpers
+
+    setup do
+      @in_request = eyeloupe_in_requests(:one)
+    end
 
     test "should get index" do
-      get eyeloupe.in_requests_url
+      get in_requests_url
       assert_response :success
     end
 
     test "should get show" do
-      get eyeloupe.in_request_url(eyeloupe_in_requests(:one))
+      get in_request_url(@in_request)
       assert_response :success
     end
   end
