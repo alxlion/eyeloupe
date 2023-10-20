@@ -1,22 +1,20 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 module Eyeloupe
-  class InRequestsControllerTest < ActionDispatch::IntegrationTest
+  class JobsControllerTest < ActionDispatch::IntegrationTest
     include Engine.routes.url_helpers
 
     setup do
-      @in_request = eyeloupe_in_requests(:one)
+      @job = eyeloupe_jobs(:one)
     end
 
     test "should get index" do
-      get in_requests_url
+      get jobs_url
       assert_response :success
     end
 
     test "should get show" do
-      get in_request_url(@in_request)
+      get jobs_url(@job)
       assert_response :success
     end
   end

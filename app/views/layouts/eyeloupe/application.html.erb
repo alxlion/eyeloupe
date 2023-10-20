@@ -84,6 +84,16 @@
                           Exceptions
                         <% end %>
                       </li>
+                      <li>
+                        <%= link_to jobs_path, class:"#{request.path.include?('/jobs') ? 'bg-gray-200 text-red-500' : ''} hover:bg-gray-200 text-gray-500 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-medium" do %>
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                            <path d="M4 14m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                          </svg>
+                          Jobs
+                        <% end %>
+                      </li>
                     </ul>
                   </li>
                 </ul>
@@ -146,6 +156,16 @@
                           <path d="M20 7l-3.75 2.4"></path>
                         </svg>
                         Exceptions
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to jobs_path, class:"#{request.path.include?('/jobs') ? 'bg-gray-200 text-red-500' : ''} hover:bg-gray-200 text-gray-500 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-medium" do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                          <path d="M4 14m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                        </svg>
+                        Jobs
                       <% end %>
                     </li>
                   </ul>
