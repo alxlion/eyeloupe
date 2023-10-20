@@ -39,14 +39,14 @@ module Eyeloupe
 
         existing = Eyeloupe::Job.where(job_id: job.job_id).first
 
-        puts existing.inspect
-
-        puts job.inspect
-
-        if existing.failed?
+        if existing&.failed?
           Eyeloupe::Job.where(job_id: job.job_id).update(completed_at: Time.now.utc, retry: existing.retry + 1)
         else
-          Eyeloupe::Job.where(job_id: job.job_id).update(status: :completed, completed_at: Time.now.utc, retry: job.executions - 1)
+          Eyeloupe::Job.where(job_id: job.job_id).update(
+            status: :completed,
+            completed_at: Time.now.utc,
+            retry: (job.executions.zero? ? 1 : job.executions) - 1
+          )
         end
       end
 
