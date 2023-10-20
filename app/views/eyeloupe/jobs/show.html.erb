@@ -1,0 +1,63 @@
+<div class="px-4 sm:px-6 lg:px-8 bg-white rounded-md shadow-md py-5">
+  <div class="px-4 sm:px-0">
+    <h3 class="text-xl font-semibold leading-7 text-gray-900">Job details</h3>
+  </div>
+  <div class="mt-6 border-t border-gray-100">
+    <dl class="divide-y divide-gray-100">
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Enqueued at</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= @job.created_at.to_formatted_s(:long) %> (<%= distance_of_time_in_words(@job.created_at, DateTime.now) %>)
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Duration</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= (@job.completed_at - @job.created_at).round %> seconds
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Name</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @job.classname %></dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Adapter</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= @job.adapter %>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Queue</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @job.queue_name %></dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Job ID</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= @job.job_id %>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Retry</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= @job.retry %>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Status</dt>
+        <dd class="mt-1 text-base leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= render "eyeloupe/shared/job_status", job: @job %>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-base font-medium leading-6 text-gray-900">Arguments</dt>
+        <dd class="mt-1 text-base leading-6 sm:col-span-2 sm:mt-0 rounded-md bg-black text-white overflow-x-auto">
+          <% if @job.args.present? %>
+            <pre class="p-2"><%= JSON.pretty_generate(JSON.parse(@job.args || "{}")) %></pre>
+          <% else %>
+            <p class="text-gray-400 p-2">No args</p>
+          <% end %>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>

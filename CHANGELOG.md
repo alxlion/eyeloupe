@@ -1,6 +1,11 @@
+## 0.4.0
+
+- Add support for ActiveJob
+- Fix pretty formatting of payloads
+
 ## 0.3.1
 
-- Add optional database config
+- Add optional database config (thanks to @kiskoza).
 
 ## 0.3.0
 

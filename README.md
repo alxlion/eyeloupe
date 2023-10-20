@@ -12,7 +12,7 @@
     <img src="app/assets/images/eyeloupe/logo.png" width=120 alt="Logo" >
   </a>
 
-<h3 align="center">Eyeloupe (beta)</h3>
+<h3 align="center">Eyeloupe</h3>
 
   <p align="center">
     The elegant Rails debug assistant. AI powered.
@@ -141,13 +141,6 @@ Eyeloupe is not a performance-oriented tool, the request time is the same you ca
 
 Yes, Eyeloupe is inspired by Laravel Telescope. A lot of people coming from Laravel are missing Telescope or looking for something similar, so Eyeloupe is here to fill this gap.
 
-## Roadmap
-
-- [x] Exceptions - Track all the exceptions thrown by your application
-- [x] AI assistant - Use OpenAI API to help you to solve your exceptions
-- [ ] Custom links to the menu - To access all of your debug tool in one place (Sidekiq web, Mailhog, etc.)
-- [ ] Refactoring / clean code - To make the code more readable and maintainable
-
 ## Contributing
 Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -165,7 +158,7 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Contact
 
-[![](https://img.shields.io/badge/@alxlion__-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/alxlion_)
+[![](https://img.shields.io/badge/@alxlion__-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/alxlion_)
 
 Project Link: [https://github.com/alxlion/eyeloupe](https://github.com/alxlion/eyeloupe)
 

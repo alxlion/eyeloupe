@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_04_190442) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_27_161224) do
   create_table "eyeloupe_exceptions", force: :cascade do |t|
     t.string "hostname"
     t.string "kind"
@@ -47,6 +47,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_190442) do
     t.text "response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "eyeloupe_jobs", force: :cascade do |t|
+    t.string "classname"
+    t.string "job_id"
+    t.string "queue_name"
+    t.string "adapter"
+    t.integer "status", default: 0
+    t.datetime "scheduled_at"
+    t.datetime "executed_at"
+    t.datetime "completed_at"
+    t.integer "retry", default: 0
+    t.string "args"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_eyeloupe_jobs_on_job_id", unique: true
   end
 
   create_table "eyeloupe_out_requests", force: :cascade do |t|

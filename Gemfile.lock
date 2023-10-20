@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    eyeloupe (0.3.0)
+    eyeloupe (0.4.0)
       importmap-rails (~> 1.1)
+      nokogiri (~> 1.15.4)
       pagy (~> 6.0)
       rails (~> 7.0)
       ruby-openai (~> 4.1.0)
@@ -76,6 +77,7 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    ast (2.4.2)
     builder (3.2.4)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
@@ -94,6 +96,7 @@ GEM
     importmap-rails (1.1.6)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    json (2.6.2)
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -117,11 +120,14 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.14.2-arm64-darwin)
+    nokogiri (1.15.4-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.14.2-x86_64-linux)
+    nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     pagy (6.0.4)
+    parallel (1.22.1)
+    parser (3.1.2.0)
+      ast (~> 2.4.1)
     racc (1.6.2)
     rack (2.2.7)
     rack-test (2.1.0)
@@ -152,10 +158,26 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
+    rainbow (3.1.1)
     rake (13.0.6)
+    regexp_parser (2.8.0)
+    rexml (3.2.5)
+    rubocop (1.31.2)
+      json (~> 2.3)
+      parallel (~> 1.10)
+      parser (>= 3.1.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.18.0, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.19.1)
+      parser (>= 3.1.1.0)
     ruby-openai (4.1.0)
       faraday (>= 1)
       faraday-multipart (>= 1)
+    ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
@@ -178,6 +200,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (2.2.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -185,11 +208,13 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
   eyeloupe!
   pagy
+  rubocop
   sprockets-rails
   sqlite3
   tailwindcss-rails (~> 2.0)
