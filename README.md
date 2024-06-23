@@ -1,3 +1,5 @@
+## Project no longer under active development - Looking for new contributors
+
 [![Gem Version](https://badge.fury.io/rb/eyeloupe.svg)](https://badge.fury.io/rb/eyeloupe)
 
 [![Contributors][contributors-shield]][contributors-url]
